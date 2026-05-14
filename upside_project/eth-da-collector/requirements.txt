@@ -1,0 +1,7 @@
+asyncpg==0.30.0
+httpx==0.27.2
+python-dotenv==1.0.1
+# Used only by the self-probe scaffold. Heavy, but the MVP collector never
+# imports it unless ENABLE_SELF_PROBE_ETHEREUM=true (import is lazy).
+web3==7.5.0
+eth-account==0.13.4

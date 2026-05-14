@@ -1,0 +1,35 @@
+[Unit]
+Description=Ethereum DA liveness collector
+After=network-online.target postgresql.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=collector
+Group=collector
+WorkingDirectory=/opt/eth-da-collector
+EnvironmentFile=/etc/eth-da-collector/.env
+Environment=PYTHONPATH=/opt/eth-da-collector/src
+ExecStart=/opt/eth-da-collector/.venv/bin/python -m collector
+Restart=always
+RestartSec=5
+# Logs go to journald; stdout is structured JSON.
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=eth-da-collector
+
+# Hardening
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+PrivateTmp=true
+ReadWritePaths=/var/log/eth-da-collector
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
+LockPersonality=true
+MemoryDenyWriteExecute=true
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,18 @@
+                  List of relations
+ Schema |          Name          | Type  |   Owner   
+--------+------------------------+-------+-----------
+ public | eth_blob_sidecars      | table | collector
+ public | eth_blob_survival      | table | collector
+ public | eth_blob_txs           | table | collector
+ public | eth_finality           | table | collector
+ public | eth_node_config        | table | collector
+ public | eth_node_health        | table | collector
+ public | eth_observation_errors | table | collector
+ public | eth_peers              | table | collector
+ public | eth_slots              | table | collector
+ public | l2_addressbook         | table | collector
+ public | probe_schedule         | table | collector
+ public | schema_migrations      | table | collector
+ public | self_probe_ethereum    | table | collector
+(13 rows)
+

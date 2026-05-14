@@ -1,0 +1,36 @@
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: collector
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-collector}
+      POSTGRES_DB: eth_da
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U collector -d eth_da"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    # Bind to localhost only. Do not publish on the public interface.
+    ports:
+      - "127.0.0.1:5432:5432"
+
+  collector:
+    build: .
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    env_file:
+      - .env
+    environment:
+      # Override DATABASE_URL inside the compose network.
+      DATABASE_URL: postgresql://collector:${POSTGRES_PASSWORD:-collector}@db:5432/eth_da
+    # If you SSH-tunnel from the host, the collector reaches the tunnel via host.docker.internal
+    # on macOS/Windows. On Linux, add: --add-host=host.docker.internal:host-gateway or use
+    # network_mode: host. Prefer Tailscale/WireGuard for prod.
+
+volumes:
+  pgdata:
