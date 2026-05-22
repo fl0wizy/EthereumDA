@@ -1,0 +1,1240 @@
+<mxfile host="Electron" agent="Claude Code" pages="5">
+  <diagram id="level0" name="Level 0 - Context Diagram">
+    <mxGraphModel dx="881" dy="810" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=22;fontStyle=1;" value="EigenDA DFD Level 0 — Context Diagram" vertex="1">
+          <mxGeometry height="40" width="600" x="40" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="EE1" parent="1" style="shape=rectangle;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;spacing=8;" value="&lt;b&gt;EE1: Rollup&lt;/b&gt;&lt;br&gt;Batcher / Sequencer /&lt;br&gt;Validator" vertex="1">
+          <mxGeometry height="100" width="200" x="100" y="350" as="geometry" />
+        </mxCell>
+        <mxCell id="EE2" parent="1" style="shape=rectangle;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=13;spacing=8;" value="&lt;b&gt;EE2: Ethereum L1&lt;/b&gt;&lt;br&gt;Infra + Sequencer Inbox" vertex="1">
+          <mxGeometry height="100" width="220" x="1280" y="350" as="geometry" />
+        </mxCell>
+        <mxCell id="EE3" parent="1" style="shape=rectangle;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=13;spacing=8;" value="&lt;b&gt;EE3: Governance&lt;/b&gt;&lt;br&gt;Owner / Ejector" vertex="1">
+          <mxGeometry height="80" width="220" x="690" y="680" as="geometry" />
+        </mxCell>
+        <mxCell id="P0" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=14;spacing=8;" value="&lt;b&gt;0&lt;/b&gt;&lt;br&gt;&lt;b&gt;EigenDA&lt;/b&gt;&lt;br&gt;&lt;b&gt;System&lt;/b&gt;" vertex="1">
+          <mxGeometry height="200" width="200" x="620" y="300" as="geometry" />
+        </mxCell>
+        <mxCell id="f1" edge="1" parent="1" source="EE1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#6c8ebf;strokeWidth=2;" target="P0">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="f1_l" connectable="0" parent="f1" style="edgeLabel;html=1;fontSize=11;fillColor=#fff;" value="Payload" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="60" y="-30" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="f2" edge="1" parent="1" source="P0" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#82b366;strokeWidth=2;" target="EE1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="720" y="520" />
+              <mxPoint x="500" y="520" />
+              <mxPoint x="500" y="410" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="f2_l" connectable="0" parent="f2" style="edgeLabel;html=1;fontSize=11;fillColor=#fff;" value="DACert / Validated Payload" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="10" y="5" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="f4" edge="1" parent="1" source="EE2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#d6b656;strokeWidth=2;" target="P0">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1390" y="520" />
+              <mxPoint x="1100" y="520" />
+              <mxPoint x="1100" y="420" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="f4_l" connectable="0" parent="f4" style="edgeLabel;html=1;fontSize=11;fillColor=#fff;" value="Threshold / Stake / Block Number" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="10" y="-10" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="f5" edge="1" parent="1" source="EE1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#b85450;strokeWidth=2;dashed=1;" target="EE2">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="210" y="180" />
+              <mxPoint x="1390" y="180" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="f5_l" connectable="0" parent="f5" style="edgeLabel;html=1;fontSize=11;fillColor=#fff;fontColor=#b85450;" value="DACert to Sequencer Inbox (outside EigenDA scope)" vertex="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="f6" edge="1" parent="1" source="EE2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#b85450;strokeWidth=2;dashed=1;" target="EE1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1390" y="560" />
+              <mxPoint x="210" y="560" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="f6_l" connectable="0" parent="f6" style="edgeLabel;html=1;fontSize=11;fillColor=#fff;fontColor=#b85450;" value="DACert from Inbox (outside EigenDA scope)" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="30" y="-20" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="f7" edge="1" parent="1" source="EE3" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#b85450;strokeWidth=1.5;" target="P0">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="f7_l" connectable="0" parent="f7" style="edgeLabel;html=1;fontSize=11;fillColor=#fff;" value="Governance (upgrade/threshold/eject)" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-160" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="note" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;align=left;spacingLeft=10;spacing=4;" value="&lt;b&gt;Trust Boundaries (Level 1, 2026-05-12 코드 검증):&lt;/b&gt;&lt;br&gt;TB0: Rollup ↔ Proxy (⚠ Proxy 자체 검증 없음, pass-through)&lt;br&gt;TB1: Proxy ↔ Disperser (validateDispersalRequest — 실제 검증 지점)&lt;br&gt;TB2: Disperser ↔ Operator (KZG proof + BLS signature)&lt;br&gt;TB3: Off-chain ↔ On-chain (checkDACert, CertVerifier V4)&lt;br&gt;TB-D: Disperser Infra (P2↔P3 상호 인증 없음/방화벽 의존, P3↔P4 무검증)&lt;br&gt;Keccak/S3 경로: 스코프 밖 (OP 레거시 호환, EigenDA 미경유)&lt;br&gt;&lt;br&gt;&lt;i&gt;Dashed red = outside EigenDA scope (L0 only)&lt;/i&gt;" vertex="1">
+          <mxGeometry height="170" width="520" x="40" y="800" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="level1" name="Level 1 - Code-verified Trust Boundaries">
+    <mxGraphModel dx="4113" dy="2125" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="3600" pageHeight="2200" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=22;fontStyle=1;" value="EigenDA DFD Level 1 — Trust Boundaries from Code Verification" vertex="1">
+          <mxGeometry height="36" width="900" x="40" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="subtitle" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=12;fontColor=#666;" value="TB는 코드에서 검증 함수가 존재하는 지점에만 표시. 2026-05-12 Layr-Labs/eigenda 코드 검증 기반. Proxy(P1/P1*)는 자체 검증 없음 확인됨." vertex="1">
+          <mxGeometry height="20" width="1200" x="40" y="56" as="geometry" />
+        </mxCell>
+        <mxCell id="TBD" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#666666;strokeWidth=3;dashed=1;dashPattern=10 4;fontSize=13;fontStyle=1;fontColor=#666666;verticalAlign=top;spacingTop=8;opacity=40;" value="TB-D: Disperser Infra — P2↔P3 상호 인증 없음(방화벽 의존), P3↔P4/DS1/DS2 무검증" vertex="1">
+          <mxGeometry height="870" width="1100" x="660" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="TB0_line" parent="1" style="shape=line;strokeColor=#999999;strokeWidth=2;dashed=1;dashPattern=4 4;direction=south;" value="" vertex="1">
+          <mxGeometry height="1100" width="10" x="300" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="TB0_label" parent="1" style="text;html=1;strokeColor=none;fillColor=#FFF9E6;fontSize=10;fontStyle=1;fontColor=#999999;align=left;spacing=4;rounded=1;" value="⚠ Proxy 진입점&lt;br&gt;자체 검증 없음 — pass-through" vertex="1">
+          <mxGeometry height="56" width="240" x="310" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="TB1_line" parent="1" style="shape=line;strokeColor=#FF0000;strokeWidth=3;dashed=1;dashPattern=8 4;direction=south;" value="" vertex="1">
+          <mxGeometry height="1100" width="10" x="620" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="TB1_label" parent="1" style="text;html=1;strokeColor=none;fillColor=#FFF0F0;fontSize=10;fontStyle=1;fontColor=#FF0000;align=left;spacing=4;rounded=1;" value="TB1: Disperser 진입&lt;br&gt;(validateDispersalRequest:&lt;br&gt; ECDSA sig + commitment + quorum)&lt;br&gt;(verifyReceivedBlobKey: 클라이언트측)&lt;br&gt;(GenerateAndCompareBlobCommitment:&lt;br&gt; retriever측)" vertex="1">
+          <mxGeometry height="100" width="280" x="630" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="TB2_line" parent="1" style="shape=line;strokeColor=#FF8C00;strokeWidth=3;dashed=1;dashPattern=8 4;direction=south;" value="" vertex="1">
+          <mxGeometry height="800" width="10" x="1800" y="300" as="geometry" />
+        </mxCell>
+        <mxCell id="TB2_label" parent="1" style="text;html=1;strokeColor=none;fillColor=#FFF8F0;fontSize=10;fontStyle=1;fontColor=#FF8C00;align=left;spacing=4;rounded=1;" value="TB2: Disperser ↔ Operator&lt;br&gt;(AuthenticateStoreChunksRequest&lt;br&gt;ValidateBatchV2 — KZG proof&lt;br&gt;Signature.Verify — BLS&lt;br&gt;AuthenticateGetChunksRequest)" vertex="1">
+          <mxGeometry height="80" width="240" x="1810" y="300" as="geometry" />
+        </mxCell>
+        <mxCell id="TB3_line" parent="1" style="shape=line;strokeColor=#9933FF;strokeWidth=3;dashed=1;dashPattern=8 4;" value="" vertex="1">
+          <mxGeometry height="10" width="1600" x="660" y="1160" as="geometry" />
+        </mxCell>
+        <mxCell id="TB3_label" parent="1" style="text;html=1;strokeColor=none;fillColor=#F8F0FF;fontSize=10;fontStyle=1;fontColor=#9933FF;align=left;spacing=4;rounded=1;" value="TB3: Off-chain ↔ On-chain (CheckDACert — eth_call → Ethereum 합의)" vertex="1">
+          <mxGeometry height="24" width="500" x="660" y="1176" as="geometry" />
+        </mxCell>
+        <mxCell id="EE1a" parent="1" style="shape=rectangle;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;spacing=6;" value="&lt;b&gt;EE1a&lt;/b&gt;&lt;br&gt;Rollup Batcher" vertex="1">
+          <mxGeometry height="60" width="160" x="60" y="400" as="geometry" />
+        </mxCell>
+        <mxCell id="EE1b" parent="1" style="shape=rectangle;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;spacing=6;" value="&lt;b&gt;EE1b&lt;/b&gt;&lt;br&gt;Rollup Validator" vertex="1">
+          <mxGeometry height="60" width="160" x="60" y="900" as="geometry" />
+        </mxCell>
+        <mxCell id="P8" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=12;spacing=4;" value="&lt;b&gt;8&lt;/b&gt;&lt;br&gt;Verify Cert&lt;br&gt;(CertVerifier)" vertex="1">
+          <mxGeometry height="110" width="180" x="910" y="1260" as="geometry" />
+        </mxCell>
+        <mxCell id="P9" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11;spacing=4;" value="&lt;b&gt;9&lt;/b&gt;&lt;br&gt;Query + Manage State&lt;br&gt;(OperatorStateRetriever&lt;br&gt;+ Registries)" vertex="1">
+          <mxGeometry height="120" width="200" x="1200" y="1250" as="geometry" />
+        </mxCell>
+        <mxCell id="WGn-j73v9VHw54bbv0x4-1" edge="1" parent="1" source="EE2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.692;exitY=0;exitDx=0;exitDy=0;exitPerimeter=0;" target="TB3_label" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="440" y="1300" />
+              <mxPoint x="795" y="1300" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="EE2" parent="1" style="shape=rectangle;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=12;spacing=6;" value="&lt;b&gt;EE2&lt;/b&gt;&lt;br&gt;Ethereum L1&lt;br&gt;(인프라)" vertex="1">
+          <mxGeometry height="60" width="130" x="350" y="1370" as="geometry" />
+        </mxCell>
+        <mxCell id="EE3" parent="1" style="shape=rectangle;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=12;spacing=6;" value="&lt;b&gt;EE3&lt;/b&gt;&lt;br&gt;Governance&lt;br&gt;(Owner/Ejector)" vertex="1">
+          <mxGeometry height="60" width="150" x="1500" y="1240" as="geometry" />
+        </mxCell>
+        <mxCell id="P1" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;spacing=4;" value="&lt;b&gt;1&lt;/b&gt;&lt;br&gt;Convert Payload&lt;br&gt;+ Build Cert&lt;br&gt;(Proxy write)" vertex="1">
+          <mxGeometry height="120" width="180" x="380" y="350" as="geometry" />
+        </mxCell>
+        <mxCell id="P1r" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;spacing=4;" value="&lt;b&gt;1*&lt;/b&gt;&lt;br&gt;Retrieve +&lt;br&gt;Verify Payload&lt;br&gt;(Proxy read)" vertex="1">
+          <mxGeometry height="120" width="180" x="380" y="850" as="geometry" />
+        </mxCell>
+        <mxCell id="P2" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;spacing=4;" value="&lt;b&gt;2&lt;/b&gt;&lt;br&gt;Receive +&lt;br&gt;Store Blob&lt;br&gt;(Disperser API)" vertex="1">
+          <mxGeometry height="110" width="160" x="720" y="250" as="geometry" />
+        </mxCell>
+        <mxCell id="P3" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;spacing=4;" value="&lt;b&gt;3 / 7&lt;/b&gt;&lt;br&gt;Authorize + Batch +&lt;br&gt;Collect Sigs&lt;br&gt;(Controller)&lt;br&gt;&lt;i&gt;incl. Payment, Attestation&lt;/i&gt;" vertex="1">
+          <mxGeometry height="120" width="180" x="720" y="460" as="geometry" />
+        </mxCell>
+        <mxCell id="P4" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;spacing=4;" value="&lt;b&gt;4&lt;/b&gt;&lt;br&gt;RS Encode +&lt;br&gt;Generate Multi-Reveal Proof&lt;br&gt;(Encoder)" vertex="1">
+          <mxGeometry height="110" width="180" x="1050" y="200" as="geometry" />
+        </mxCell>
+        <mxCell id="P6" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;spacing=4;" value="&lt;b&gt;6&lt;/b&gt;&lt;br&gt;Serve Blobs&lt;br&gt;+ Chunks&lt;br&gt;(Relay)" vertex="1">
+          <mxGeometry height="110" width="160" x="1350" y="700" as="geometry" />
+        </mxCell>
+        <mxCell id="DS1" parent="1" style="shape=partialRectangle;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;fontStyle=1;top=1;bottom=1;left=0;right=0;" value="DS1 | MetadataStore (DynamoDB)" vertex="1">
+          <mxGeometry height="36" width="340" x="710" y="790" as="geometry" />
+        </mxCell>
+        <mxCell id="DS2" parent="1" style="shape=partialRectangle;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;fontStyle=1;top=1;bottom=1;left=0;right=0;" value="DS2 | Blob Store (S3)" vertex="1">
+          <mxGeometry height="36" width="300" x="1030" y="434" as="geometry" />
+        </mxCell>
+        <mxCell id="P5" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;spacing=4;" value="&lt;b&gt;5&lt;/b&gt;&lt;br&gt;Validate +&lt;br&gt;Store Chunks&lt;br&gt;(DA Node)" vertex="1">
+          <mxGeometry height="120" width="180" x="2100" y="550" as="geometry" />
+        </mxCell>
+        <mxCell id="DS3" parent="1" style="shape=partialRectangle;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;fontStyle=1;top=1;bottom=1;left=0;right=0;" value="DS3 | Node Store (litt)" vertex="1">
+          <mxGeometry height="36" width="200" x="2100" y="730" as="geometry" />
+        </mxCell>
+        <mxCell id="f1" edge="1" parent="1" source="EE1a" style="rounded=1;strokeColor=#333;strokeWidth=1.5;" target="P1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="f1_l" connectable="0" parent="f1" style="edgeLabel;html=1;fontSize=10;fillColor=#fff;" value="Payload&lt;br&gt;&lt;font color=&#39;#999&#39;&gt;(Proxy 자체 검증 없음)&lt;/font&gt;" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-20" y="-50" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="f17" edge="1" parent="1" source="P1" style="rounded=1;strokeColor=#333;strokeWidth=1.5;exitX=0;exitY=1;exitDx=0;exitDy=0;" target="EE1a">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="350" y="450" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="f17_l" connectable="0" parent="f17" style="edgeLabel;html=1;fontSize=10;fillColor=#fff;" value="DACert" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-20" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="f20" edge="1" parent="1" source="EE1b" style="rounded=1;strokeColor=#333;strokeWidth=1.5;" target="P1r">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="f20_l" connectable="0" parent="f20" style="edgeLabel;html=1;fontSize=10;fillColor=#fff;" value="Cert (URL)&lt;br&gt;&lt;font color=&#39;#999&#39;&gt;(Proxy 자체 검증 없음)&lt;/font&gt;" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-60" y="-50" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="f24" edge="1" parent="1" source="P1r" style="rounded=1;strokeColor=#333;strokeWidth=1.5;" target="EE1b">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="350" y="960" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="f24_l" connectable="0" parent="f24" style="edgeLabel;html=1;fontSize=10;fillColor=#fff;fontStyle=1;" value="Validated Payload&lt;br&gt;&lt;font color=&#39;#999&#39;&gt;(검증은 retriever 라이브러리가 수행)&lt;/font&gt;" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-88" y="6" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="f2" edge="1" parent="1" source="P1" style="rounded=1;strokeColor=#FF0000;strokeWidth=2;" target="P2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="f2_l" connectable="0" parent="f2" style="edgeLabel;html=1;fontSize=10;fillColor=#fff;" value="DisperseBlob (gRPC)&lt;br&gt;&lt;font color=&#39;#FF0000&#39;&gt;→ validateDispersalRequest()&lt;/font&gt;" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-20" y="4" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="f16" edge="1" parent="1" source="P2" style="rounded=1;strokeColor=#FF0000;strokeWidth=1;dashed=1;" target="P1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="650" y="300" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="f16_l" connectable="0" parent="f16" style="edgeLabel;html=1;fontSize=9;fillColor=#fff;" value="BlobStatusReply&lt;br&gt;(부분 신뢰 — 최종 cert만 checkDACert)" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-63" y="-47" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="f3" edge="1" parent="1" source="P2" style="rounded=1;strokeColor=#666;strokeWidth=1;" target="P3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="f3_l" connectable="0" parent="f3" style="edgeLabel;html=1;fontSize=9;fillColor=#fff;" value="① AuthorizePayment (gRPC)&lt;br&gt;&lt;font color=&#39;#666&#39;&gt;P2↔P3 상호 인증 없음 (방화벽 의존)&lt;/font&gt;&lt;br&gt;&lt;font color=&#39;#666&#39;&gt;P3이 원본 클라이언트 서명만 검증&lt;/font&gt;" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-75" y="-10" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="f3b" edge="1" parent="1" source="P2" style="rounded=1;strokeColor=#666;strokeWidth=1;" target="DS2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="f3b_l" connectable="0" parent="f3b" style="edgeLabel;html=1;fontSize=9;fillColor=#fff;fontColor=#666;" value="② Blob 저장" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="25" y="-15" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="f7a" edge="1" parent="1" source="P2" style="rounded=1;strokeColor=#666;strokeWidth=1;" target="DS1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="900" y="340" />
+              <mxPoint x="900" y="598" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="f7a_l" connectable="0" parent="f7a" style="edgeLabel;html=1;fontSize=9;fillColor=#fff;fontColor=#666;" value="③ Metadata" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-40" y="40" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="f5" edge="1" parent="1" source="P3" style="rounded=1;strokeColor=#666;strokeWidth=1;" target="P4">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="950" y="480" />
+              <mxPoint x="950" y="260" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="f5_l" connectable="0" parent="f5" style="edgeLabel;html=1;fontSize=9;fillColor=#fff;fontColor=#666;" value="Encode Request&lt;br&gt;(무검증)" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint y="-130" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="f5b" edge="1" parent="1" source="DS2" style="rounded=1;strokeColor=#666;strokeWidth=1;" target="P4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="f5b_l" connectable="0" parent="f5b" style="edgeLabel;html=1;fontSize=9;fillColor=#fff;fontColor=#666;" value="Blob 읽기 (무검증)" vertex="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="f6" edge="1" parent="1" source="P4" style="rounded=1;strokeColor=#666;strokeWidth=1;" target="DS2">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1300" y="310" />
+              <mxPoint x="1300" y="388" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="f6_l" connectable="0" parent="f6" style="edgeLabel;html=1;fontSize=9;fillColor=#fff;fontColor=#666;" value="Chunk 저장 (무검증)" vertex="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="f9" edge="1" parent="1" source="DS2" style="rounded=1;strokeColor=#666;strokeWidth=1;" target="P6">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1420" y="460" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="f9_l" connectable="0" parent="f9" style="edgeLabel;html=1;fontSize=9;fillColor=#fff;fontColor=#666;" value="Chunk+Blob 읽기 (무검증)" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-83" y="-101" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="f15a" edge="1" parent="1" style="rounded=1;strokeColor=#666;strokeWidth=1;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="800.0030971822541" y="579.9963823978435" as="sourcePoint" />
+            <mxPoint x="851.315" y="790.76" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="f15a_l" connectable="0" parent="f15a" style="edgeLabel;html=1;fontSize=9;fillColor=#fff;fontColor=#666;" value="Attestation (무검증)" vertex="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="f15b" edge="1" parent="1" style="rounded=1;strokeColor=#666;strokeWidth=1;dashed=1;">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="963.35" y="590" />
+              <mxPoint x="963.35" y="360" />
+            </Array>
+            <mxPoint x="926.6527522935781" y="790" as="sourcePoint" />
+            <mxPoint x="909.9999446025553" y="335.41971830578154" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="f15b_l" connectable="0" parent="f15b" style="edgeLabel;html=1;fontSize=9;fillColor=#fff;fontColor=#666;" value="Status (폴링)" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-23" y="13" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="f7b" edge="1" parent="1" style="rounded=1;strokeColor=#666;strokeWidth=1;">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="800.46" y="650" />
+            </Array>
+            <mxPoint x="784.0888726939697" y="579.308061393538" as="sourcePoint" />
+            <mxPoint x="835.9030379746835" y="790" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="f7b_l" connectable="0" parent="f7b" style="edgeLabel;html=1;fontSize=9;fillColor=#fff;fontColor=#666;" value="Status 갱신" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-50" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="f8" edge="1" parent="1" source="P3" style="rounded=1;strokeColor=#FF8C00;strokeWidth=2;" target="P5">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1470" y="550" />
+              <mxPoint x="1600" y="560" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="f8_l" connectable="0" parent="f8" style="edgeLabel;html=1;fontSize=10;fillColor=#fff;fontColor=#FF8C00;" value="StoreChunksRequest&lt;br&gt;(Cert만, Chunk 없음)" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-50" y="1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="f10" edge="1" parent="1" source="P6" style="rounded=1;strokeColor=#FF8C00;strokeWidth=2;" target="P5">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1700" y="760" />
+              <mxPoint x="1700" y="640" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="f10_l" connectable="0" parent="f10" style="edgeLabel;html=1;fontSize=10;fillColor=#fff;fontColor=#FF8C00;" value="Chunks (V2 pull)&lt;br&gt;→ ValidateBatchV2로 검증" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-36" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="f12" edge="1" parent="1" source="P5" style="rounded=1;strokeColor=#FF8C00;strokeWidth=2;" target="P3">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="2070" y="540" />
+              <mxPoint x="1900" y="510" />
+              <mxPoint x="910" y="510" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="f12_l" connectable="0" parent="f12" style="edgeLabel;html=1;fontSize=10;fillColor=#fff;fontColor=#FF8C00;" value="BLS Signature&lt;br&gt;→ Signature.Verify로 검증" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-31" y="-41" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="f11" edge="1" parent="1" source="P5" style="rounded=1;strokeColor=#333;strokeWidth=1;" target="DS3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="f11_l" connectable="0" parent="f11" style="edgeLabel;html=1;fontSize=9;fillColor=#fff;" value="Chunk 저장&lt;br&gt;(checksum 없음)" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="4" y="-10" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="f21" edge="1" parent="1" source="P1r" style="rounded=1;strokeColor=#333;strokeWidth=1.5;" target="P6">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="600" y="920" />
+              <mxPoint x="1300" y="920" />
+              <mxPoint x="1300" y="760" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="f21_l" connectable="0" parent="f21" style="edgeLabel;html=1;fontSize=10;fillColor=#fff;" value="GetBlob&lt;br&gt;&lt;font color=&#39;#FF0000&#39;&gt;(인증 없음, rate limit만)&lt;/font&gt;" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="75" y="-40" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="f22" edge="1" parent="1" source="P6" style="rounded=1;strokeColor=#333;strokeWidth=1;dashed=1;" target="P1r">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1250" y="780" />
+              <mxPoint x="1250" y="950" />
+              <mxPoint x="600" y="950" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="f22_l" connectable="0" parent="f22" style="edgeLabel;html=1;fontSize=9;fillColor=#fff;" value="Blob → commitment 재비교 검증" vertex="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="f16d" edge="1" parent="1" source="P1" style="rounded=1;strokeColor=#9933FF;strokeWidth=2;" target="P8">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="500" y="480" />
+              <mxPoint x="540" y="1040" />
+              <mxPoint x="990" y="1050" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="f16d_l" connectable="0" parent="f16d" style="edgeLabel;html=1;fontSize=10;fillColor=#fff;fontColor=#9933FF;" value="checkDACert +&lt;br&gt;quorumNumbersRequired +&lt;br&gt;certVersion&lt;br&gt;(write path — L2: P1.1b, P1.3b, P1.5)" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="412" y="-1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="f23" edge="1" parent="1" source="P1r" style="rounded=1;strokeColor=#9933FF;strokeWidth=2;" target="P8">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="470" y="980" />
+              <mxPoint x="470" y="1120" />
+              <mxPoint x="950" y="1120" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="f23_l" connectable="0" parent="f23" style="edgeLabel;html=1;fontSize=10;fillColor=#fff;fontColor=#9933FF;" value="checkDACert (read path — 조회 전)" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="63" y="-20" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="f16b" edge="1" parent="1" source="P1" style="rounded=1;strokeColor=#9933FF;strokeWidth=1.5;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" target="P9">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="570" y="1010" />
+              <mxPoint x="1300" y="1010" />
+            </Array>
+            <mxPoint x="538" y="460" as="sourcePoint" />
+            <mxPoint x="1297.5000000000005" y="1204.25" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="f16b_l" connectable="0" parent="f16b" style="edgeLabel;html=1;fontSize=9;fillColor=#fff;fontColor=#9933FF;" value="getCheckSignaturesIndices" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="424" y="-20" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="f_eth" edge="1" parent="1" source="P1" style="rounded=1;strokeColor=#9673a6;strokeWidth=1.5;dashed=1;exitX=0.238;exitY=0.923;exitDx=0;exitDy=0;exitPerimeter=0;" target="EE2">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="f_eth_l" connectable="0" parent="f_eth" style="edgeLabel;html=1;fontSize=9;fillColor=#fff;fontColor=#9673a6;" value="eth_blockNumber&lt;br&gt;(인프라)" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-94" y="385" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="f16d_r" edge="1" parent="1" source="P8" style="rounded=1;strokeColor=#9933FF;strokeWidth=1;dashed=1;" target="P1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="940" y="1200" />
+              <mxPoint x="440" y="1200" />
+              <mxPoint x="440" y="480" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="f16d_r_l" connectable="0" parent="f16d_r" style="edgeLabel;html=1;fontSize=9;fillColor=#fff;fontColor=#9933FF;" value="status_code /&lt;br&gt;quorumNumbers /&lt;br&gt;certVersion" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-10" y="21" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="f23_r" edge="1" parent="1" source="P8" style="rounded=1;strokeColor=#9933FF;strokeWidth=1;dashed=1;" target="P1r">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="920" y="1240" />
+              <mxPoint x="910" y="1230" />
+              <mxPoint x="430" y="1220" />
+              <mxPoint x="430" y="970" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="f23_r_l" connectable="0" parent="f23_r" style="edgeLabel;html=1;fontSize=9;fillColor=#fff;fontColor=#9933FF;" value="status_code" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-4" y="-13" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="f16b_r" edge="1" parent="1" style="rounded=1;strokeColor=#9933FF;strokeWidth=1;dashed=1;" target="P1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1280" y="1180" />
+              <mxPoint x="520" y="1180" />
+              <mxPoint x="520" y="470" />
+            </Array>
+            <mxPoint x="1280" y="1250" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="f16b_r_l" connectable="0" parent="f16b_r" style="edgeLabel;html=1;fontSize=9;fillColor=#fff;fontColor=#9933FF;" value="Indices" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="675" y="40" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="f26" edge="1" parent="1" source="P9" style="rounded=1;strokeColor=#9933FF;strokeWidth=1.5;entryX=0.78;entryY=0.928;entryDx=0;entryDy=0;entryPerimeter=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" target="P3">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1450" y="1320" />
+              <mxPoint x="1670" y="1320" />
+              <mxPoint x="1650" y="690" />
+            </Array>
+            <mxPoint x="1410" y="1316" as="sourcePoint" />
+            <mxPoint x="900" y="500" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="f26_l" connectable="0" parent="f26" style="edgeLabel;html=1;fontSize=9;fillColor=#fff;fontColor=#9933FF;" value="OperatorState" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-77" y="-81" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="f25" edge="1" parent="1" source="EE3" style="rounded=1;strokeColor=#b85450;strokeWidth=1.5;" target="P9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="f25_l" connectable="0" parent="f25" style="edgeLabel;html=1;fontSize=9;fillColor=#fff;fontColor=#b85450;" value="Governance&lt;br&gt;(onlyOwner/onlyEjector)" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="52" y="-88" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="proxy_gap_w" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFEEEE;strokeColor=#CC0000;fontSize=9;fontStyle=0;fontColor=#CC0000;align=center;spacing=4;dashed=1;" value="⚠ P1: 자체 검증 로직 없음&lt;br&gt;검증은 Disperser(P2)와&lt;br&gt;클라이언트 라이브러리에 위임" vertex="1">
+          <mxGeometry height="56" width="200" x="370" y="492" as="geometry" />
+        </mxCell>
+        <mxCell id="proxy_gap_r" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFEEEE;strokeColor=#CC0000;fontSize=9;fontStyle=0;fontColor=#CC0000;align=center;spacing=4;dashed=1;" value="⚠ P1*: checkDACert만 호출&lt;br&gt;blob commitment 재검증은&lt;br&gt;retriever 라이브러리가 수행" vertex="1">
+          <mxGeometry height="56" width="200" x="205" y="1000" as="geometry" />
+        </mxCell>
+        <mxCell id="leg_bg" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f9f9f9;strokeColor=#ddd;" value="" vertex="1">
+          <mxGeometry height="650" width="620" x="2280" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="leg_title" parent="1" style="text;html=1;strokeColor=none;fillColor=none;fontSize=16;fontStyle=1;" value="Legend" vertex="1">
+          <mxGeometry height="24" width="80" x="2340" y="110" as="geometry" />
+        </mxCell>
+        <mxCell id="leg_tb" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff;strokeColor=#999;fontSize=11;align=left;spacingLeft=10;spacing=6;" value="&lt;b&gt;Trust Boundaries (코드 검증 함수 기준, 2026-05-12 검증)&lt;/b&gt;&lt;br&gt;&lt;br&gt;&lt;font color=&quot;#999999&quot;&gt;--- TB0&lt;/font&gt;: Proxy 진입점 — 자체 검증 없음 (pass-through)&lt;br&gt;&lt;br&gt;&lt;font color=&quot;#FF0000&quot;&gt;━ TB1&lt;/font&gt;: Disperser 진입 — validateDispersalRequest&lt;br&gt;    (ECDSA sig + commitment + quorum + field element)&lt;br&gt;    verifyReceivedBlobKey (클라이언트측)&lt;br&gt;    GenerateAndCompareBlobCommitment (retriever측)&lt;br&gt;&lt;br&gt;&lt;font color=&quot;#FF8C00&quot;&gt;━ TB2&lt;/font&gt;: Disperser ↔ Operator — AuthenticateStoreChunksRequest,&lt;br&gt;    ValidateBatchV2(KZG), Signature.Verify(BLS),&lt;br&gt;    AuthenticateGetChunksRequest&lt;br&gt;    ⚠ Relay 응답 데이터 미서명, Relay 서버 미인증&lt;br&gt;&lt;br&gt;&lt;font color=&quot;#9933FF&quot;&gt;━ TB3&lt;/font&gt;: Off-chain ↔ On-chain —&amp;nbsp;&lt;div&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;P8: checkDACert, quorumNumbersRequired, certVersion (CertVerifier, V4)&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;P9: getCheckSignaturesIndices(checkDACert 내부)&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;EE2: eth_blockNumber / Recency: 오프체인&lt;br&gt;&lt;br&gt;&lt;font color=&quot;#666666&quot;&gt;█ TB-D&lt;/font&gt;: Disperser 인프라 — P2/P3/P4/P6/DS1/DS2&lt;br&gt;    P2↔P3 상호 인증 없음 (방화벽 의존, 클라이언트 서명만 전달 검증)&lt;br&gt;    P3↔P4 무검증. DS1/DS2 무결성 미검증. P7/P10은 P3에 통합&lt;/div&gt;" vertex="1">
+          <mxGeometry height="380" width="500" x="2330" y="140" as="geometry" />
+        </mxCell>
+        <mxCell id="leg_flow" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff;strokeColor=#999;fontSize=11;align=left;spacingLeft=10;spacing=6;" value="&lt;b&gt;데이터 흐름&lt;/b&gt;&lt;br&gt;&lt;font color=&#39;#333&#39;&gt;검정(가는)&lt;/font&gt; = Proxy 진입 (무검증 pass-through)&lt;br&gt;&lt;font color=&#39;#FF0000&#39;&gt;빨강&lt;/font&gt; = TB1 교차 (Disperser 진입, 실제 검증)&lt;br&gt;&lt;font color=&#39;#FF8C00&#39;&gt;주황&lt;/font&gt; = TB2 교차 (Disperser↔Operator)&lt;br&gt;&lt;font color=&#39;#9933FF&#39;&gt;보라&lt;/font&gt; = TB3 교차 (Off↔On-chain)&lt;br&gt;&lt;font color=&#39;#666666&#39;&gt;회색&lt;/font&gt; = TB-D 내부 (무검증 신뢰)&lt;br&gt;점선 = 응답/폴링" vertex="1">
+          <mxGeometry height="160" width="360" x="2330" y="540" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="L2_P3" name="Level 2 - P3 Controller Service">
+    <mxGraphModel dx="2742" dy="1417" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2400" pageHeight="1600" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=20;fontStyle=1;" value="L2 DFD — P3 Controller Service (disperser/controller/)" vertex="1">
+          <mxGeometry height="36" width="800" x="40" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="subtitle" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=12;fontColor=#666;" value="단일 바이너리(disperser/cmd/controller/main.go) 내부의 3개 독립 goroutine" vertex="1">
+          <mxGeometry height="20" width="700" x="40" y="56" as="geometry" />
+        </mxCell>
+        <mxCell id="P2_ext" parent="1" style="shape=rectangle;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;fontStyle=1;dashed=1;" value="P2&lt;br&gt;Disperser API" vertex="1">
+          <mxGeometry height="60" width="140" x="60" y="200" as="geometry" />
+        </mxCell>
+        <mxCell id="P4_ext" parent="1" style="shape=rectangle;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;fontStyle=1;dashed=1;" value="P4&lt;br&gt;Encoder" vertex="1">
+          <mxGeometry height="60" width="120" x="1100" y="200" as="geometry" />
+        </mxCell>
+        <mxCell id="P5_ext" parent="1" style="shape=rectangle;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;fontStyle=1;dashed=1;" value="P5&lt;br&gt;DA Node" vertex="1">
+          <mxGeometry height="60" width="120" x="1080" y="460" as="geometry" />
+        </mxCell>
+        <mxCell id="DS1" parent="1" style="shape=partialRectangle;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;fontStyle=1;top=1;bottom=1;left=0;right=0;" value="DS1 | MetadataStore (DynamoDB)" vertex="1">
+          <mxGeometry height="36" width="360" x="400" y="750" as="geometry" />
+        </mxCell>
+        <mxCell id="P3_1" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;spacing=4;" value="&lt;b&gt;3.1&lt;/b&gt;&lt;br&gt;Authorize Payment&lt;br&gt;(gRPC Server)&lt;br&gt;&lt;i&gt;incl. OnDemandMeterer&lt;/i&gt;" vertex="1">
+          <mxGeometry height="120" width="190" x="360" y="160" as="geometry" />
+        </mxCell>
+        <mxCell id="P3_2" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;spacing=4;" value="&lt;b&gt;3.2&lt;/b&gt;&lt;br&gt;Schedule +&lt;br&gt;Track Encoding&lt;br&gt;(EncodingManager)" vertex="1">
+          <mxGeometry height="110" width="180" x="600" y="160" as="geometry" />
+        </mxCell>
+        <mxCell id="P3_3" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;spacing=4;" value="&lt;b&gt;3.3&lt;/b&gt;&lt;br&gt;Dispatch Batch&lt;br&gt;+ Collect Sigs&lt;br&gt;(Controller/Dispatcher)" vertex="1">
+          <mxGeometry height="120" width="200" x="600" y="450" as="geometry" />
+        </mxCell>
+        <mxCell id="f1" edge="1" parent="1" source="P2_ext" style="rounded=1;strokeColor=#333;strokeWidth=1.5;" target="P3_1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="f1_l" connectable="0" parent="f1" style="edgeLabel;html=1;fontSize=10;fillColor=#fff;" value="AuthorizePaymentRequest&lt;br&gt;{BlobHeader, Signature}" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-70" y="-45" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="f1b" edge="1" parent="1" source="P3_1" style="rounded=1;strokeColor=#333;strokeWidth=1;dashed=1;" target="P2_ext">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="240" y="280" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="f1b_l" connectable="0" parent="f1b" style="edgeLabel;html=1;fontSize=9;fillColor=#fff;" value="AuthorizePaymentReply" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-56" y="3" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="f3" edge="1" parent="1" source="DS1" style="rounded=1;strokeColor=#333;strokeWidth=1.5;entryX=0.014;entryY=0.605;entryDx=0;entryDy=0;entryPerimeter=0;" target="P3_2">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="500" y="750" />
+              <mxPoint x="500" y="400" />
+              <mxPoint x="510" y="290" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="f3_l" connectable="0" parent="f3" style="edgeLabel;html=1;fontSize=10;fillColor=#fff;" value="Queued blobs&lt;br&gt;(cursor-based read)" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-50" y="-69" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="f4" edge="1" parent="1" source="P3_2" style="rounded=1;strokeColor=#009900;strokeWidth=2;" target="P4_ext">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="f4_l" connectable="0" parent="f4" style="edgeLabel;html=1;fontSize=10;fillColor=#fff;fontColor=#009900;" value="EncodeBlobRequest&lt;br&gt;{blob_key, params, size}" vertex="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="f5" edge="1" parent="1" source="P3_2" style="rounded=1;strokeColor=#009900;strokeWidth=1.5;" target="DS1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="550" y="280" />
+              <mxPoint x="550" y="750" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="f5_l" connectable="0" parent="f5" style="edgeLabel;html=1;fontSize=10;fillColor=#fff;fontColor=#009900;" value="PutBlobCertificate&lt;br&gt;{incl. RelayKeys} +&lt;br&gt;Status → ENCODED" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint y="-77" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="f6" edge="1" parent="1" source="DS1" style="rounded=1;strokeColor=#FF8C00;strokeWidth=2;" target="P3_3">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="580" y="750" />
+              <mxPoint x="580" y="510" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="f6_l" connectable="0" parent="f6" style="edgeLabel;html=1;fontSize=10;fillColor=#fff;fontColor=#FF8C00;" value="Encoded blobs&lt;br&gt;(BlobDispersalQueue)" vertex="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="f7" edge="1" parent="1" source="P3_3" style="rounded=1;strokeColor=#FF8C00;strokeWidth=2;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1070" y="510" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="f7_l" connectable="0" parent="f7" style="edgeLabel;html=1;fontSize=10;fillColor=#fff;fontColor=#FF8C00;" value="StoreChunksRequest&lt;br&gt;{Batch(BlobCerts)}" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="5" y="-40" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="f8" edge="1" parent="1" source="P5_ext" style="rounded=1;strokeColor=#0066CC;strokeWidth=2;entryX=0.823;entryY=0.913;entryDx=0;entryDy=0;entryPerimeter=0;" target="P3_3">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1140" y="560" />
+              <mxPoint x="1020" y="560" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="f8_l" connectable="0" parent="f8" style="edgeLabel;html=1;fontSize=10;fillColor=#fff;fontColor=#0066CC;" value="StoreChunksReply&lt;br&gt;{BLS Signature}" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-42" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="f9" edge="1" parent="1" source="P3_3" style="rounded=1;strokeColor=#0066CC;strokeWidth=2;" target="DS1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="700" y="600" />
+              <mxPoint x="700" y="750" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="f9_l" connectable="0" parent="f9" style="edgeLabel;html=1;fontSize=10;fillColor=#fff;fontColor=#0066CC;" value="① empty PutAttestation&lt;br&gt;② Status → GATHERING_SIGS&lt;br&gt;③ update Attestation (sigs)&lt;br&gt;④ Status → COMPLETE" vertex="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="leg" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#ccc;fontSize=11;align=left;spacingLeft=10;spacing=4;" value="&lt;b&gt;상태 전이&lt;/b&gt;: P2 → QUEUED → &lt;font color=&#39;#009900&#39;&gt;P3.2(EncodingManager) → ENCODED&lt;/font&gt; → &lt;font color=&#39;#FF8C00&#39;&gt;P3.3(Dispatcher) → GATHERING_SIGS&lt;/font&gt; → &lt;font color=&#39;#0066CC&#39;&gt;COMPLETE&lt;/font&gt;&lt;br&gt;&lt;b&gt;수정&lt;/b&gt;: P3.2→DS2 제거 (relay key는 BlobCertificate 필드로 DS1에 함께 저장). P3.4(Payment) → P3.1 내부로 흡수" vertex="1">
+          <mxGeometry height="80" width="900" x="40" y="860" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="L2_P1" name="Level 2 - P1 Proxy Write Path">
+    <mxGraphModel dx="2991" dy="1545" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2800" pageHeight="1600" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=20;fontStyle=1;" value="L2 DFD — P1 Proxy Write Path (api/proxy/ + api/clients/v2/dispersal/)" vertex="1">
+          <mxGeometry height="36" width="900" x="40" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="EE1a" parent="1" style="shape=rectangle;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;fontStyle=1;dashed=1;" value="EE1a&lt;br&gt;Rollup Batcher" vertex="1">
+          <mxGeometry height="60" width="130" x="40" y="450" as="geometry" />
+        </mxCell>
+        <mxCell id="P2_ext" parent="1" style="shape=rectangle;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;fontStyle=1;dashed=1;" value="P2&lt;br&gt;Disperser API" vertex="1">
+          <mxGeometry height="60" width="130" x="1200" y="150" as="geometry" />
+        </mxCell>
+        <mxCell id="P8_ext" parent="1" style="shape=rectangle;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11;fontStyle=1;dashed=1;" value="P8&lt;br&gt;Verify Cert&lt;br&gt;(on-chain)" vertex="1">
+          <mxGeometry height="60" width="130" x="2100" y="350" as="geometry" />
+        </mxCell>
+        <mxCell id="P9_ext" parent="1" style="shape=rectangle;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11;fontStyle=1;dashed=1;" value="P9&lt;br&gt;Registry&lt;br&gt;(on-chain)" vertex="1">
+          <mxGeometry height="60" width="130" x="2100" y="600" as="geometry" />
+        </mxCell>
+        <mxCell id="EE2_eth" parent="1" style="shape=rectangle;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11;fontStyle=1;dashed=1;" value="EE2&lt;br&gt;Ethereum L1&lt;br&gt;(node RPC)" vertex="1">
+          <mxGeometry height="60" width="130" x="2300" y="200" as="geometry" />
+        </mxCell>
+        <mxCell id="TB3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8F0FF;strokeColor=#9933FF;strokeWidth=2;dashed=1;dashPattern=8 4;opacity=20;" value="" vertex="1">
+          <mxGeometry height="440" width="300" x="2000" y="280" as="geometry" />
+        </mxCell>
+        <mxCell id="TB3_l" parent="1" style="text;html=1;strokeColor=none;fillColor=none;fontSize=10;fontStyle=1;fontColor=#9933FF;" value="TB3: On-chain" vertex="1">
+          <mxGeometry height="16" width="100" x="2010" y="285" as="geometry" />
+        </mxCell>
+        <mxCell id="P1_1" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;spacing=4;" value="&lt;b&gt;1.1&lt;/b&gt;&lt;br&gt;Encode Payload&lt;br&gt;→ Blob" vertex="1">
+          <mxGeometry height="100" width="160" x="260" y="400" as="geometry" />
+        </mxCell>
+        <mxCell id="P1_1b" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;spacing=4;" value="&lt;b&gt;1.1b&lt;/b&gt;&lt;br&gt;Get Quorum&lt;br&gt;Numbers" vertex="1">
+          <mxGeometry height="90" width="140" x="500" y="300" as="geometry" />
+        </mxCell>
+        <mxCell id="P1_2" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;spacing=4;" value="&lt;b&gt;1.2&lt;/b&gt;&lt;br&gt;Disperse Blob&lt;br&gt;(gRPC + local&lt;br&gt;commitment)" vertex="1">
+          <mxGeometry height="110" width="170" x="700" y="200" as="geometry" />
+        </mxCell>
+        <mxCell id="P1_3" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;spacing=4;" value="&lt;b&gt;1.3&lt;/b&gt;&lt;br&gt;Poll Blob Status&lt;br&gt;+ Check Thresholds" vertex="1">
+          <mxGeometry height="110" width="170" x="950" y="200" as="geometry" />
+        </mxCell>
+        <mxCell id="P1_3b" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;spacing=4;" value="&lt;b&gt;1.3b&lt;/b&gt;&lt;br&gt;Wait Block +&lt;br&gt;Get CertVersion" vertex="1">
+          <mxGeometry height="100" width="160" x="1250" y="400" as="geometry" />
+        </mxCell>
+        <mxCell id="P1_4" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;spacing=4;" value="&lt;b&gt;1.4&lt;/b&gt;&lt;br&gt;Build DACert&lt;br&gt;(CertBuilder)" vertex="1">
+          <mxGeometry height="100" width="170" x="1500" y="500" as="geometry" />
+        </mxCell>
+        <mxCell id="P1_5" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;spacing=4;" value="&lt;b&gt;1.5&lt;/b&gt;&lt;br&gt;Verify DACert&lt;br&gt;(checkDACert)" vertex="1">
+          <mxGeometry height="100" width="170" x="1750" y="400" as="geometry" />
+        </mxCell>
+        <mxCell id="P1_6" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;spacing=4;" value="&lt;b&gt;1.6&lt;/b&gt;&lt;br&gt;Serialize +&lt;br&gt;Return" vertex="1">
+          <mxGeometry height="90" width="150" x="600" y="650" as="geometry" />
+        </mxCell>
+        <mxCell id="w1" edge="1" parent="1" source="EE1a" style="rounded=1;strokeColor=#333;strokeWidth=1.5;" target="P1_1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="w1_l" connectable="0" parent="w1" style="edgeLabel;html=1;fontSize=10;fillColor=#fff;" value="Payload" vertex="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="w1b" edge="1" parent="1" source="P1_1" style="rounded=1;strokeColor=#333;strokeWidth=1.5;" target="P1_1b">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="w1b_l" connectable="0" parent="w1b" style="edgeLabel;html=1;fontSize=10;fillColor=#fff;" value="Blob" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-19" y="-26" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="w1c" edge="1" parent="1" source="P1_1b" style="rounded=1;strokeColor=#9933FF;strokeWidth=1.5;" target="P8_ext">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="700" y="340" />
+              <mxPoint x="700" y="120" />
+              <mxPoint x="2165" y="120" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="w1c_l" connectable="0" parent="w1c" style="edgeLabel;html=1;fontSize=9;fillColor=#fff;fontColor=#9933FF;" value="eth_call:&lt;br&gt;QuorumNumbersRequired&lt;br&gt;(CertVerifier)" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-8" y="-50" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="w1d" edge="1" parent="1" source="P8_ext" style="rounded=1;strokeColor=#9933FF;strokeWidth=1;dashed=1;" target="P1_1b">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="2060" y="370" />
+              <mxPoint x="2060" y="160" />
+              <mxPoint x="590" y="160" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="w1d_l" connectable="0" parent="w1d" style="edgeLabel;html=1;fontSize=9;fillColor=#fff;fontColor=#9933FF;" value="quorumNumbers[]" vertex="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="w2" edge="1" parent="1" source="P1_1b" style="rounded=1;strokeColor=#333;strokeWidth=1.5;" target="P1_2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="w2_l" connectable="0" parent="w2" style="edgeLabel;html=1;fontSize=10;fillColor=#fff;" value="Blob + quorums" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-61" y="-32" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="w3" edge="1" parent="1" source="P1_2" style="rounded=1;strokeColor=#333;strokeWidth=1.5;" target="P2_ext">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="w3_l" connectable="0" parent="w3" style="edgeLabel;html=1;fontSize=10;fillColor=#fff;" value="DisperseBlob (gRPC)" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="36" y="-46" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="w3b" edge="1" parent="1" source="P2_ext" style="rounded=1;strokeColor=#333;strokeWidth=1;dashed=1;exitX=0;exitY=0;exitDx=0;exitDy=0;" target="P1_2">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1100" y="140" />
+              <mxPoint x="780" y="140" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="w3b_l" connectable="0" parent="w3b" style="edgeLabel;html=1;fontSize=9;fillColor=#fff;" value="blob_key" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-11" y="-10" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="w4" edge="1" parent="1" source="P1_2" style="rounded=1;strokeColor=#333;strokeWidth=1.5;" target="P1_3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="w4_l" connectable="0" parent="w4" style="edgeLabel;html=1;fontSize=10;fillColor=#fff;" value="blob_key" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-20" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="w5" edge="1" parent="1" source="P1_3" style="rounded=1;strokeColor=#333;strokeWidth=1.5;" target="P2_ext">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1200" y="260" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="w5_l" connectable="0" parent="w5" style="edgeLabel;html=1;fontSize=10;fillColor=#fff;" value="GetBlobStatus (poll)" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-82" y="-30" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="w5b" edge="1" parent="1" source="P2_ext" style="rounded=1;strokeColor=#333;strokeWidth=1;dashed=1;" target="P1_3">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1150" y="340" />
+              <mxPoint x="1050" y="340" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="w5b_l" connectable="0" parent="w5b" style="edgeLabel;html=1;fontSize=9;fillColor=#fff;" value="BlobStatusReply&lt;br&gt;(when COMPLETE/&lt;br&gt;GATHERING_SIGS)" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-19" y="-58" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="w6" edge="1" parent="1" source="P1_3" style="rounded=1;strokeColor=#333;strokeWidth=1.5;" target="P1_3b">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1100" y="350" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="w6_l" connectable="0" parent="w6" style="edgeLabel;html=1;fontSize=10;fillColor=#fff;" value="SignedBatch +&lt;br&gt;BlobInclusionInfo" vertex="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="w6b_eth" edge="1" parent="1" source="P1_3b" style="rounded=1;strokeColor=#9673a6;strokeWidth=1.5;dashed=1;entryX=-0.001;entryY=0.148;entryDx=0;entryDy=0;entryPerimeter=0;" target="EE2_eth">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1500" y="420" />
+              <mxPoint x="1930" y="250" />
+              <mxPoint x="2010" y="230" />
+              <mxPoint x="2080" y="209" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="w6b_eth_l" connectable="0" parent="w6b_eth" style="edgeLabel;html=1;fontSize=9;fillColor=#fff;fontColor=#9673a6;" value="eth_blockNumber&lt;br&gt;(polling until RBN)" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="355" y="-113" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="w6b_eth_r" edge="1" parent="1" source="EE2_eth" style="rounded=1;strokeColor=#9673a6;strokeWidth=1;dashed=1;" target="P1_3b">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="2020" y="240" />
+              <mxPoint x="2020" y="400" />
+              <mxPoint x="1420" y="400" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="w6b_eth_r_l" connectable="0" parent="w6b_eth_r" style="edgeLabel;html=1;fontSize=9;fillColor=#fff;fontColor=#9673a6;" value="blockNumber" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-503" y="-10" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="w6b" edge="1" parent="1" source="P1_3b" style="rounded=1;strokeColor=#9933FF;strokeWidth=1.5;exitX=0.783;exitY=0.09;exitDx=0;exitDy=0;exitPerimeter=0;" target="P8_ext">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1480" y="380" />
+              <mxPoint x="1700" y="380" />
+              <mxPoint x="1940" y="380" />
+              <mxPoint x="2060" y="380" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="w6b_l" connectable="0" parent="w6b" style="edgeLabel;html=1;fontSize=9;fillColor=#fff;fontColor=#9933FF;" value="eth_call:&lt;br&gt;CertVersion()&lt;br&gt;(CertVerifier)" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-206" y="-40" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="w6c" edge="1" parent="1" source="P8_ext" style="rounded=1;strokeColor=#9933FF;strokeWidth=1;dashed=1;" target="P1_3b">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="2020" y="400" />
+              <mxPoint x="2020" y="490" />
+              <mxPoint x="1420" y="490" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="w6c_l" connectable="0" parent="w6c" style="edgeLabel;html=1;fontSize=9;fillColor=#fff;fontColor=#9933FF;" value="certVersion" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="138" y="-20" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="w7" edge="1" parent="1" source="P1_3b" style="rounded=1;strokeColor=#333;strokeWidth=1.5;" target="P1_4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="w7_l" connectable="0" parent="w7" style="edgeLabel;html=1;fontSize=10;fillColor=#fff;" value="batch + certVersion" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-46" y="-9" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="w8" edge="1" parent="1" source="P1_4" style="rounded=1;strokeColor=#9933FF;strokeWidth=2;exitX=0.984;exitY=0.599;exitDx=0;exitDy=0;exitPerimeter=0;" target="P9_ext">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1800" y="560" />
+              <mxPoint x="2160" y="560" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="w8_l" connectable="0" parent="w8" style="edgeLabel;html=1;fontSize=10;fillColor=#fff;fontColor=#9933FF;" value="GetCheckSignatures&lt;br&gt;Indices (eth_call)" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-84" y="-40" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="w8b" edge="1" parent="1" source="P9_ext" style="rounded=1;strokeColor=#9933FF;strokeWidth=1;dashed=1;entryX=1;entryY=1;entryDx=0;entryDy=0;" target="P1_4">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="w8b_l" connectable="0" parent="w8b" style="edgeLabel;html=1;fontSize=9;fillColor=#fff;fontColor=#9933FF;" value="Indices" vertex="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="w9" edge="1" parent="1" source="P1_4" style="rounded=1;strokeColor=#333;strokeWidth=1.5;" target="P1_5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="w9_l" connectable="0" parent="w9" style="edgeLabel;html=1;fontSize=10;fillColor=#fff;" value="EigenDACertV4" vertex="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="w10" edge="1" parent="1" style="rounded=1;strokeColor=#9933FF;strokeWidth=2;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1915.0160352924108" y="429.34052247396454" as="sourcePoint" />
+            <mxPoint x="2100" y="389.99787878787873" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="w10_l" connectable="0" parent="w10" style="edgeLabel;html=1;fontSize=10;fillColor=#fff;fontColor=#9933FF;" value="checkDACert" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="62" y="-20" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="w10b" edge="1" parent="1" source="P8_ext" style="rounded=1;strokeColor=#9933FF;strokeWidth=1;dashed=1;" target="P1_5">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="2050" y="380" />
+              <mxPoint x="2050" y="430" />
+              <mxPoint x="1950" y="430" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="w10b_l" connectable="0" parent="w10b" style="edgeLabel;html=1;fontSize=9;fillColor=#fff;fontColor=#9933FF;" value="status_code (uint8)" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-103" y="-10" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="w11" edge="1" parent="1" source="P1_5" style="rounded=1;strokeColor=#333;strokeWidth=1.5;" target="P1_6">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1600" y="500" />
+              <mxPoint x="1600" y="700" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="w11_l" connectable="0" parent="w11" style="edgeLabel;html=1;fontSize=10;fillColor=#fff;" value="Verified cert" vertex="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="w12" edge="1" parent="1" source="P1_6" style="rounded=1;strokeColor=#333;strokeWidth=1.5;" target="EE1a">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="300" y="700" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="w12_l" connectable="0" parent="w12" style="edgeLabel;html=1;fontSize=10;fillColor=#fff;" value="Serialized cert bytes" vertex="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="leg" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#ccc;fontSize=11;align=left;spacingLeft=10;spacing=4;" value="&lt;b&gt;Write Path&lt;/b&gt;: 1.1 Encode → 1.1b &lt;font color=&#39;#9933FF&#39;&gt;QuorumNumbers (→P8 CertVerifier)&lt;/font&gt; → 1.2 Disperse(gRPC, local commitment) → 1.3 Poll(+checkThresholds) → 1.3b &lt;font color=&#39;#9933FF&#39;&gt;WaitBlock(→EE2)+CertVersion(→P8 CertVerifier)&lt;/font&gt; → 1.4 Build(&lt;font color=&#39;#9933FF&#39;&gt;GetCheckSignaturesIndices →P9&lt;/font&gt;) → 1.5 Verify(&lt;font color=&#39;#9933FF&#39;&gt;checkDACert →P8&lt;/font&gt;) → 1.6 Return" vertex="1">
+          <mxGeometry height="50" width="1200" x="40" y="820" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="L2_P1r" name="Level 2 - P1* Proxy Retrieval Path">
+    <mxGraphModel dx="1265" dy="654" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2400" pageHeight="1600" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=20;fontStyle=1;" value="L2 DFD — P1* Proxy Retrieval Path (api/proxy/ + api/clients/v2/payloadretrieval/)" vertex="1">
+          <mxGeometry height="36" width="1000" x="40" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="EE1b" parent="1" style="shape=rectangle;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;fontStyle=1;dashed=1;" value="EE1b&lt;br&gt;Rollup Validator" vertex="1">
+          <mxGeometry height="60" width="130" x="40" y="500" as="geometry" />
+        </mxCell>
+        <mxCell id="P6_ext" parent="1" style="shape=rectangle;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;fontStyle=1;dashed=1;" value="P6&lt;br&gt;Relay" vertex="1">
+          <mxGeometry height="60" width="120" x="1300" y="250" as="geometry" />
+        </mxCell>
+        <mxCell id="P5_ext" parent="1" style="shape=rectangle;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;fontStyle=1;dashed=1;" value="P5&lt;br&gt;DA Node" vertex="1">
+          <mxGeometry height="60" width="120" x="1300" y="500" as="geometry" />
+        </mxCell>
+        <mxCell id="P8_ext" parent="1" style="shape=rectangle;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11;fontStyle=1;dashed=1;" value="P8&lt;br&gt;Verify Cert&lt;br&gt;(on-chain)" vertex="1">
+          <mxGeometry height="60" width="130" x="650" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="DS_cache" parent="1" style="shape=partialRectangle;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=10;top=1;bottom=1;left=0;right=0;" value="DS_cache | Secondary Cache&lt;br&gt;(S3/Redis/fallback store)" vertex="1">
+          <mxGeometry height="36" width="280" x="700" y="400" as="geometry" />
+        </mxCell>
+        <mxCell id="TB3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8F0FF;strokeColor=#9933FF;strokeWidth=2;dashed=1;dashPattern=8 4;opacity=20;" value="" vertex="1">
+          <mxGeometry height="110" width="210" x="610" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="TB3_l" parent="1" style="text;html=1;strokeColor=none;fillColor=none;fontSize=10;fontStyle=1;fontColor=#9933FF;" value="TB3" vertex="1">
+          <mxGeometry height="16" width="30" x="620" y="95" as="geometry" />
+        </mxCell>
+        <mxCell id="TB2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF8F0;strokeColor=#FF8C00;strokeWidth=2;dashed=1;dashPattern=8 4;opacity=20;" value="" vertex="1">
+          <mxGeometry height="120" width="180" x="1270" y="470" as="geometry" />
+        </mxCell>
+        <mxCell id="TB2_l" parent="1" style="text;html=1;strokeColor=none;fillColor=none;fontSize=10;fontStyle=1;fontColor=#FF8C00;" value="TB2" vertex="1">
+          <mxGeometry height="16" width="30" x="1280" y="475" as="geometry" />
+        </mxCell>
+        <mxCell id="R1" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;spacing=4;" value="&lt;b&gt;1*.1&lt;/b&gt;&lt;br&gt;Parse Cert" vertex="1">
+          <mxGeometry height="90" width="140" x="250" y="450" as="geometry" />
+        </mxCell>
+        <mxCell id="R2" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;spacing=4;" value="&lt;b&gt;1*.2&lt;/b&gt;&lt;br&gt;Verify Cert&lt;br&gt;(checkDACert +&lt;br&gt;V4 recency check)&lt;br&gt;&lt;i&gt;BEFORE retrieval&lt;/i&gt;" vertex="1">
+          <mxGeometry height="130" width="180" x="462" y="280" as="geometry" />
+        </mxCell>
+        <mxCell id="R2b" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;spacing=4;" value="&lt;b&gt;1*.2b&lt;/b&gt;&lt;br&gt;Check Secondary&lt;br&gt;Cache&lt;br&gt;&lt;font color=&#39;#009900&#39;&gt;&lt;i&gt;(verify() 호출 확인됨)&lt;/i&gt;&lt;/font&gt;" vertex="1">
+          <mxGeometry height="120" width="180" x="720" y="480" as="geometry" />
+        </mxCell>
+        <mxCell id="R3" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;spacing=4;" value="&lt;b&gt;1*.3&lt;/b&gt;&lt;br&gt;Retrieve Blob&lt;br&gt;(Relay)&lt;br&gt;&lt;i&gt;incl. commitment&lt;br&gt;verify + decode&lt;/i&gt;" vertex="1">
+          <mxGeometry height="120" width="190" x="1020" y="230" as="geometry" />
+        </mxCell>
+        <mxCell id="R4" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;spacing=4;" value="&lt;b&gt;1*.4&lt;/b&gt;&lt;br&gt;Retrieve Chunks&lt;br&gt;(Validator fallback)&lt;br&gt;&lt;i&gt;incl. commitment&lt;br&gt;verify + decode&lt;/i&gt;" vertex="1">
+          <mxGeometry height="130" width="190" x="1020" y="470" as="geometry" />
+        </mxCell>
+        <mxCell id="r1" edge="1" parent="1" source="EE1b" style="rounded=1;strokeColor=#333;strokeWidth=1.5;" target="R1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r1_l" connectable="0" parent="r1" style="edgeLabel;html=1;fontSize=10;fillColor=#fff;" value="Serialized cert&lt;br&gt;(URL path)" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-21" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="r2" edge="1" parent="1" source="R1" style="rounded=1;strokeColor=#333;strokeWidth=1.5;" target="R2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r2_l" connectable="0" parent="r2" style="edgeLabel;html=1;fontSize=10;fillColor=#fff;" value="VersionedCert" vertex="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r3" edge="1" parent="1" source="R2" style="rounded=1;strokeColor=#9933FF;strokeWidth=2;" target="P8_ext">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r3_l" connectable="0" parent="r3" style="edgeLabel;html=1;fontSize=10;fillColor=#fff;fontColor=#9933FF;" value="checkDACert +&lt;br&gt;recency check" vertex="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r3b" edge="1" parent="1" source="P8_ext" style="rounded=1;strokeColor=#9933FF;strokeWidth=1;dashed=1;" target="R2">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="620" y="160" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="r3b_l" connectable="0" parent="r3b" style="edgeLabel;html=1;fontSize=9;fillColor=#fff;fontColor=#9933FF;" value="status_code (uint8)" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-52" y="-27" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="r4a" edge="1" parent="1" source="R2" style="rounded=1;strokeColor=#333;strokeWidth=1.5;" target="R2b">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r4a_l" connectable="0" parent="r4a" style="edgeLabel;html=1;fontSize=10;fillColor=#fff;" value="cert (verified)" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-21" y="27" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="r4b" edge="1" parent="1" source="R2b" style="rounded=1;strokeColor=#333;strokeWidth=1.5;" target="DS_cache">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r4b_l" connectable="0" parent="r4b" style="edgeLabel;html=1;fontSize=9;fillColor=#fff;" value="Read cache" vertex="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r5" edge="1" parent="1" style="rounded=1;strokeColor=#333;strokeWidth=1.5;">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="973.06" y="458.81" />
+            </Array>
+            <mxPoint x="889.999496800242" y="508.7040083826135" as="sourcePoint" />
+            <mxPoint x="1078.5166825537917" y="350.00476136108165" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="r5_l" connectable="0" parent="r5" style="edgeLabel;html=1;fontSize=10;fillColor=#fff;" value="cache miss →&lt;br&gt;try retrievers[]" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="8" y="-69" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="r6" edge="1" parent="1" source="R3" style="rounded=1;strokeColor=#333;strokeWidth=1.5;" target="P6_ext">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1250" y="270" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="r6_l" connectable="0" parent="r6" style="edgeLabel;html=1;fontSize=10;fillColor=#fff;" value="GetBlob{blob_key}" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-43" y="-20" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="r6b" edge="1" parent="1" source="P6_ext" style="rounded=1;strokeColor=#333;strokeWidth=1;dashed=1;" target="R3">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1260" y="300" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="r6b_l" connectable="0" parent="r6b" style="edgeLabel;html=1;fontSize=9;fillColor=#fff;" value="Blob" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-15" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="r7" edge="1" parent="1" source="R3" style="rounded=1;strokeColor=#FF8C00;strokeWidth=2;dashed=1;" target="R4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r7_l" connectable="0" parent="r7" style="edgeLabel;html=1;fontSize=10;fillColor=#fff;fontColor=#FF8C00;" value="relay fail →&lt;br&gt;next retriever" vertex="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r8" edge="1" parent="1" style="rounded=1;strokeColor=#FF8C00;strokeWidth=2;">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1256.16" y="510" />
+            </Array>
+            <mxPoint x="1209.9963358268171" y="521.9683573782326" as="sourcePoint" />
+            <mxPoint x="1306.16" y="523.6363636363636" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="r8_l" connectable="0" parent="r8" style="edgeLabel;html=1;fontSize=10;fillColor=#fff;fontColor=#FF8C00;" value="GetChunks&lt;br&gt;(per operator)" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-48" y="-35" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="r8b" edge="1" parent="1" source="P5_ext" style="rounded=1;strokeColor=#FF8C00;strokeWidth=1;dashed=1;" target="R4">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1270" y="550" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="r8b_l" connectable="0" parent="r8b" style="edgeLabel;html=1;fontSize=9;fillColor=#fff;fontColor=#FF8C00;" value="Chunks" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-15" y="1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="r9" edge="1" parent="1" source="R3" style="rounded=1;strokeColor=#333;strokeWidth=1.5;" target="EE1b">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="800" y="220" />
+              <mxPoint x="630" y="220" />
+              <mxPoint x="200" y="220" />
+              <mxPoint x="200" y="500" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="r9_l" connectable="0" parent="r9" style="edgeLabel;html=1;fontSize=10;fillColor=#fff;fontStyle=1;" value="Validated Payload" vertex="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="r10" edge="1" parent="1" source="R4" style="rounded=1;strokeColor=#FF8C00;strokeWidth=1.5;" target="EE1b">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="900" y="600" />
+              <mxPoint x="200" y="600" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="r10_l" connectable="0" parent="r10" style="edgeLabel;html=1;fontSize=10;fillColor=#fff;fontColor=#FF8C00;" value="Validated Payload&lt;br&gt;(fallback)" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="27" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="r11" edge="1" parent="1" source="R2b" style="rounded=1;strokeColor=#82b366;strokeWidth=1.5;dashed=1;" target="EE1b">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="540" y="580" />
+              <mxPoint x="350" y="580" />
+              <mxPoint x="200" y="580" />
+              <mxPoint x="200" y="560" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="r11_l" connectable="0" parent="r11" style="edgeLabel;html=1;fontSize=10;fillColor=#fff;" value="Cache hit → Payload&lt;br&gt;(MultiSourceRead verify() 통과 후 반환)" vertex="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-67" y="-40" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="leg" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#ccc;fontSize=11;align=left;spacingLeft=10;spacing=4;" value="&lt;b&gt;Retrieval 순서&lt;/b&gt;: 1*.1 Parse → 1*.2 &lt;font color=&#39;#9933FF&#39;&gt;checkDACert + recency&lt;/font&gt; (BEFORE retrieval) → 1*.2b &lt;font color=&#39;#009900&#39;&gt;Secondary Cache (MultiSourceRead → verify() 호출)&lt;/font&gt; → 1*.3 Relay(+commitment verify+decode) → [fail] → &lt;font color=&#39;#FF8C00&#39;&gt;1*.4 Validator(+commitment verify+decode)&lt;/font&gt;&lt;br&gt;&lt;b&gt;코드 검증 결과&lt;/b&gt;: 1*.2b secondary cache 경로는 verify() 함수를 전달받아 실행함 (store/secondary/secondary.go:205). 검증 실패 시 skip → 다음 백엔드.&lt;br&gt;&lt;b&gt;위협&lt;/b&gt;: Relay GetBlob (1*.3)은 &lt;font color=&#39;#FF0000&#39;&gt;인증 없음&lt;/font&gt; — rate limit만 존재 (relay/server.go:203). GetChunks만 operator 서명 인증.&lt;br&gt;&lt;b&gt;순서&lt;/b&gt;: retrievers[] 슬라이스 순차 loop — config/build 단계에서 [relay, validator] 순서 고정" vertex="1">
+          <mxGeometry height="80" width="1100" x="40" y="720" as="geometry" />
+        </mxCell>
+        <mxCell id="NWfZn-VqYFGlNpnFi0ss-1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;strokeWidth=2;dashed=1;dashPattern=8 4;strokeColor=#FF0000;fillColor=none;opacity=70;" value="" vertex="1">
+          <mxGeometry height="110" width="210" x="1255" y="225" as="geometry" />
+        </mxCell>
+        <mxCell id="LznYsNl3J6d9JZzAARwj-1" parent="1" style="text;whiteSpace=wrap;html=1;" value="&lt;span style=&quot;color: rgb(255, 0, 0); font-family: Helvetica; font-size: 10px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 700; letter-spacing: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: nowrap; background-color: rgb(236, 236, 236); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;&quot;&gt;TB1&lt;/span&gt;" vertex="1">
+          <mxGeometry height="25" width="30" x="1270" y="225" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
