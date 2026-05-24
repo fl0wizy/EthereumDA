@@ -5,9 +5,10 @@ import { usePathname } from "next/navigation";
 
 const navItems = [
   { href: "/", label: "Overview" },
-  { href: "/survival", label: "Blob Lifecycle" },
+  { href: "/liveness", label: "Liveness" },
+  { href: "/eth-da-security", label: "ETH DA · Safety/Liveness" },
   { href: "/spec-vs-reality", label: "Spec vs Reality" },
-  { href: "/incidents", label: "Incidents" },
+  { href: "/threat-modeling", label: "Threat Modeling" },
 ];
 
 export default function Header() {
@@ -15,18 +16,18 @@ export default function Header() {
 
   return (
     <header className="border-b border-card-border bg-card-bg/80 backdrop-blur-sm sticky top-0 z-50">
-      <div className="max-w-[1400px] mx-auto px-6 py-4 flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-accent-blue to-accent-purple flex items-center justify-center text-sm font-bold">
-            DA
+      <div className="max-w-[1400px] mx-auto px-6 py-4 flex items-center justify-between gap-4">
+        <Link href="/" className="flex items-center gap-3 shrink-0">
+          <div className="w-9 h-9 rounded-lg bg-card-border flex items-center justify-center text-base font-bold tracking-tight">
+            B
           </div>
           <div>
-            <h1 className="text-lg font-bold tracking-tight">DA Watch</h1>
-            <p className="text-xs text-muted">Data Availability Monitor</p>
+            <h1 className="text-lg font-bold tracking-tight">BONDA</h1>
+            <p className="text-xs text-muted">DA Security Dashboard</p>
           </div>
-        </div>
+        </Link>
 
-        <nav className="flex gap-1">
+        <nav className="flex flex-wrap gap-1">
           {navItems.map((item) => {
             const isActive =
               item.href === "/"
@@ -36,10 +37,10 @@ export default function Header() {
               <Link
                 key={item.href}
                 href={item.href}
-                className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                className={`px-4 py-2 rounded-lg text-base font-medium transition-colors ${
                   isActive
-                    ? "bg-accent-blue/20 text-accent-blue"
-                    : "text-muted hover:text-foreground hover:bg-card-border/50"
+                    ? "bg-card-border text-foreground"
+                    : "text-muted hover:text-foreground hover:bg-card-border/60"
                 }`}
               >
                 {item.label}
@@ -48,12 +49,9 @@ export default function Header() {
           })}
         </nav>
 
-        <div className="flex items-center gap-3 text-xs text-muted">
-          <span className="flex items-center gap-1.5">
-            <span className="w-2 h-2 rounded-full bg-accent-green animate-pulse" />
-            Live
-          </span>
-          <span>Updated 30s ago</span>
+        <div className="hidden md:flex items-center gap-2 text-xs text-muted shrink-0">
+          <span className="w-1.5 h-1.5 rounded-full bg-accent-green" />
+          <span>실시간</span>
         </div>
       </div>
     </header>

@@ -14,8 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "DA Watch — Data Availability Monitor",
-  description: "Real-time monitoring dashboard for EthereumDA, EigenDA, Celestia, and Avail. Spec vs Reality.",
+  title: "BONDA — DA Security Dashboard",
+  description: "EthereumDA · EigenDA · Celestia · Avail. Liveness, Spec vs Reality, Threat Modeling.",
 };
 
 export default function RootLayout({
@@ -34,8 +34,9 @@ export default function RootLayout({
           {children}
         </main>
         <footer className="border-t border-card-border py-4 text-center text-xs text-muted">
-          DA Watch — Built with live probe data. Not financial advice.
+          BONDA · 실시간 probe 데이터 기반 · 투자 권유 아님
         </footer>
+        {/* (note: BONDA / Liveness / Spec vs Reality / Threat Modeling 같은 페이지 키워드는 영문, 본문은 한글 정책) */}
       </body>
     </html>
   );
