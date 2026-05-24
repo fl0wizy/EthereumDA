@@ -1,16 +1,18 @@
 @import "tailwindcss";
 
 :root {
-  --background: #0b0f1a;
-  --foreground: #e2e8f0;
-  --card-bg: #111827;
-  --card-border: #1e293b;
-  --accent-green: #10b981;
-  --accent-red: #ef4444;
-  --accent-yellow: #f59e0b;
-  --accent-blue: #3b82f6;
-  --accent-purple: #8b5cf6;
-  --muted: #64748b;
+  /* Calmer dark — less navy/cyber, slightly warmer charcoal. */
+  --background: #0a0a0c;
+  --foreground: #ececef;
+  --card-bg: #131316;
+  --card-border: #2a2a30;
+  --accent-green: #34d399;
+  --accent-red: #f87171;
+  --accent-yellow: #fbbf24;
+  --accent-blue: #60a5fa;
+  --accent-purple: #a78bfa;
+  /* Readable secondary text — bumped from gray-500 to gray-400 for legibility. */
+  --muted: #9ca3af;
 }
 
 @theme inline {
@@ -28,22 +30,31 @@
   --font-mono: var(--font-geist-mono);
 }
 
+html {
+  /* Bigger base for legibility — 16px → 17px. Korean glyphs read more comfortably. */
+  font-size: 17px;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
 }
 
 /* Custom scrollbar */
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--card-bg);
+  background: var(--background);
 }
 ::-webkit-scrollbar-thumb {
   background: var(--card-border);
-  border-radius: 3px;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--muted);
 }
 
 /* Recharts tooltip */

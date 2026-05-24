@@ -10,38 +10,69 @@ import {
   Tooltip,
   Legend,
 } from "recharts";
-import { latencyData } from "../data/mock";
+import { latencyData, daInfo } from "../data/mock";
+import type { DALayer } from "../data/mock";
 
-export default function LatencyChart() {
+const ALL_DA: { key: DALayer; name: string; color: string }[] = [
+  { key: "ethereumda", name: "EthereumDA", color: "#627eea" },
+  { key: "eigenda", name: "EigenDA", color: "#7c3aed" },
+  { key: "celestia", name: "Celestia", color: "#8b5cf6" },
+  { key: "avail", name: "Avail", color: "#06b6d4" },
+];
+
+export default function LatencyChart({ daFilter }: { daFilter?: DALayer }) {
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
+
+  const series = daFilter ? ALL_DA.filter((d) => d.key === daFilter) : ALL_DA;
+  const headerName = daFilter ? daInfo[daFilter].name : "전체 DA";
 
   return (
     <div className="bg-card-bg border border-card-border rounded-xl p-6">
       <div className="mb-6">
-        <h2 className="text-lg font-bold">Submit Latency (24h)</h2>
-        <p className="text-sm text-muted mt-1">
-          Time from blob submit request to confirmation — measured from our probe nodes
+        <h3 className="text-lg font-bold">Submit Latency 24h · {headerName}</h3>
+        <p className="text-sm text-muted mt-1 leading-relaxed">
+          Blob 제출 요청부터 confirmation 까지 — BONDA probe 노드 기준
         </p>
       </div>
       <div className="overflow-x-auto">
         {mounted ? (
-          <AreaChart width={580} height={300} data={latencyData} margin={{ top: 5, right: 30, left: 10, bottom: 5 }}>
-            <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" />
-            <XAxis dataKey="time" stroke="#64748b" fontSize={11} tickLine={false} />
-            <YAxis stroke="#64748b" fontSize={11} tickLine={false} tickFormatter={(v) => `${(v / 1000).toFixed(0)}s`} />
+          <AreaChart
+            width={620}
+            height={280}
+            data={latencyData}
+            margin={{ top: 5, right: 30, left: 10, bottom: 5 }}
+          >
+            <CartesianGrid strokeDasharray="3 3" stroke="#2a2a30" />
+            <XAxis dataKey="time" stroke="#9ca3af" fontSize={12} tickLine={false} />
+            <YAxis
+              stroke="#9ca3af"
+              fontSize={12}
+              tickLine={false}
+              tickFormatter={(v) => `${(v / 1000).toFixed(0)}s`}
+            />
             <Tooltip
-              contentStyle={{ background: "#111827", border: "1px solid #1e293b", borderRadius: 8, fontSize: 12 }}
+              contentStyle={{ background: "#131316", border: "1px solid #2a2a30", borderRadius: 8, fontSize: 13 }}
               formatter={(value) => [`${(Number(value) / 1000).toFixed(1)}s`, ""]}
             />
-            <Legend wrapperStyle={{ fontSize: 12, paddingTop: 8 }} />
-            <Area type="monotone" dataKey="ethereumda" name="EthereumDA" stroke="#627eea" fill="#627eea" fillOpacity={0.1} strokeWidth={2} />
-            <Area type="monotone" dataKey="eigenda" name="EigenDA" stroke="#7c3aed" fill="#7c3aed" fillOpacity={0.1} strokeWidth={2} />
-            <Area type="monotone" dataKey="celestia" name="Celestia" stroke="#8b5cf6" fill="#8b5cf6" fillOpacity={0.1} strokeWidth={2} />
-            <Area type="monotone" dataKey="avail" name="Avail" stroke="#06b6d4" fill="#06b6d4" fillOpacity={0.1} strokeWidth={2} />
+            <Legend wrapperStyle={{ fontSize: 13, paddingTop: 8 }} />
+            {series.map((da) => (
+              <Area
+                key={da.key}
+                type="monotone"
+                dataKey={da.key}
+                name={da.name}
+                stroke={da.color}
+                fill={da.color}
+                fillOpacity={0.15}
+                strokeWidth={2}
+              />
+            ))}
           </AreaChart>
         ) : (
-          <div className="h-[300px] flex items-center justify-center text-muted text-sm">Loading chart...</div>
+          <div className="h-[280px] flex items-center justify-center text-muted text-sm">
+            차트 로딩 중…
+          </div>
         )}
       </div>
     </div>

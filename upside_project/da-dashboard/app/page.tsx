@@ -1,56 +1,102 @@
 "use client";
 
-import StatusCard from "./components/StatusCard";
-import SurvivalCurve from "./components/SurvivalCurve";
-import LatencyChart from "./components/LatencyChart";
-import RelayStatus from "./components/RelayStatus";
-import { daStatuses } from "./data/mock";
+import { DATabs, DAPanel } from "./components/DATabs";
+import { daInfo } from "./data/mock";
+import type { DAInfo, DALayer } from "./data/mock";
+
+function StatGrid({ d }: { d: DAInfo }) {
+  return (
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <Stat
+        label="경제 보안"
+        value={d.economicSecurity}
+        sub={d.economicSecurityNote}
+      />
+      <Stat
+        label="운영자"
+        value={d.operatorCount}
+        sub={d.operatorKind}
+      />
+      <Stat
+        label="활성 롤업"
+        value={d.activeRollups.slice(0, 3).join(", ")}
+        sub={
+          d.rollupCountTotal
+            ? `외 ${Math.max(0, d.rollupCountTotal - 3)}개 · 총 ~${d.rollupCountTotal}개`
+            : undefined
+        }
+      />
+      <Stat label="처리량" value={d.throughput} sub={d.retentionPolicy} />
+    </div>
+  );
+}
+
+function Stat({ label, value, sub }: { label: string; value: string; sub?: string }) {
+  return (
+    <div className="border border-card-border rounded-lg p-4 bg-card-bg/40">
+      <div className="text-xs uppercase tracking-wider text-muted mb-2">{label}</div>
+      <div className="text-lg font-semibold leading-snug">{value}</div>
+      {sub && <div className="text-sm text-muted mt-1.5 leading-relaxed">{sub}</div>}
+    </div>
+  );
+}
+
+function ConsensusRow({ d }: { d: DAInfo }) {
+  return (
+    <div className="mt-5 text-sm text-muted">
+      <span>합의 / 임계값: </span>
+      <span className="text-foreground font-mono">{d.consensusModel}</span>
+    </div>
+  );
+}
+
+function BondaOnlyBlock({ d }: { d: DAInfo }) {
+  return (
+    <div className="mt-6 border-t border-card-border pt-5">
+      <div className="flex items-center gap-2 mb-3 flex-wrap">
+        <span className="text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded bg-accent-blue/15 text-accent-blue border border-accent-blue/30">
+          BONDA 단독
+        </span>
+        <span className="text-sm text-muted">
+          이 DA 한정으로 다른 explorer에서는 볼 수 없는 지표
+        </span>
+      </div>
+      <ul className="space-y-2">
+        {d.bondaOnlyHighlights.map((h, i) => (
+          <li key={i} className="flex items-start gap-3 text-base leading-relaxed">
+            <span className="text-accent-blue shrink-0 mt-1.5 w-1.5 h-1.5 rounded-full bg-accent-blue" />
+            <span>{h}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+function OverviewPanel({ da }: { da: DALayer }) {
+  const d = daInfo[da];
+  return (
+    <DAPanel da={da}>
+      <StatGrid d={d} />
+      <ConsensusRow d={d} />
+      <BondaOnlyBlock d={d} />
+    </DAPanel>
+  );
+}
 
 export default function Home() {
   return (
-    <div className="space-y-8">
-      {/* Hero stats */}
+    <div className="space-y-6">
       <div>
-        <h2 className="text-2xl font-bold mb-1">Overview</h2>
-        <p className="text-sm text-muted mb-6">
-          Live health status across 4 DA layers — powered by self-hosted full nodes, light nodes, and active blob probing
+        <h2 className="text-3xl font-bold mb-2 tracking-tight">Overview</h2>
+        <p className="text-base text-muted max-w-3xl leading-relaxed">
+          4개 DA 레이어를 동일한 잣대로 본다. 각 DA가 무엇인지, 어떻게 보호되는지, 누가 쓰는지,
+          그리고 BONDA가 단독으로 보여주는 차별점을 다룬다. 실측 라이브니스·스펙 차이·위협 모델링은
+          각 전용 페이지를 참고.
         </p>
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
-          {daStatuses.map((da) => (
-            <StatusCard key={da.id} da={da} />
-          ))}
-        </div>
       </div>
 
-      {/* Key insight banner */}
-      <div className="bg-gradient-to-r from-accent-red/10 to-accent-purple/10 border border-accent-red/20 rounded-xl p-5">
-        <div className="flex items-start gap-4">
-          <div className="w-10 h-10 rounded-lg bg-accent-red/20 flex items-center justify-center shrink-0">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ef4444" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
-              <line x1="12" y1="9" x2="12" y2="13" />
-              <line x1="12" y1="17" x2="12.01" y2="17" />
-            </svg>
-          </div>
-          <div>
-            <h3 className="font-bold text-accent-red">Critical Finding: EigenDA Relay Centralization</h3>
-            <p className="text-sm text-muted mt-1 leading-relaxed">
-              Despite the whitepaper claiming multiple relays prevent centralization, only <strong className="text-foreground">1 of 3</strong> registered
-              relays has a non-zero key. The remaining 2 are 0x0. Combined with a <strong className="text-foreground">global rate limit</strong> (not
-              per-client), a single DoS attack on the active relay could take down the entire network.
-            </p>
-          </div>
-        </div>
-      </div>
-
-      {/* Charts */}
-      <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
-        <SurvivalCurve />
-        <LatencyChart />
-      </div>
-
-      {/* EigenDA Relay Detail */}
-      <RelayStatus />
+      <DATabs>{(active) => <OverviewPanel da={active} />}</DATabs>
     </div>
   );
 }
