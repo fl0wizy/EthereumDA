@@ -94,6 +94,15 @@ class Config:
         ("19d", 24 * 19),
     )
 
+    # Optional public RPC fallback for EL queries (e.g. receipt lookup when
+    # own EL is mid-sync). Empty string disables.
+    public_execution_rpc_url: str = ""
+
+    # Optional public beacon endpoints for multi-source retrieval (P2).
+    # Tuple of (name, url) pairs. Built from `PUBLIC_BEACON_URLS` env var
+    # (comma-separated URLs; name is auto-derived from hostname).
+    public_beacon_endpoints: Tuple[Tuple[str, str], ...] = ()
+
 
 def load_config() -> Config:
     # Explicit path: dotenv's caller-frame search misbehaves in some module
@@ -128,4 +137,36 @@ def load_config() -> Config:
         log_level=_str("LOG_LEVEL", "INFO"),
         log_format=_str("LOG_FORMAT", "json"),
         self_probe=self_probe,
+        public_execution_rpc_url=_str("PUBLIC_EXECUTION_RPC_URL", ""),
+        public_beacon_endpoints=_parse_public_beacons(
+            _str("PUBLIC_BEACON_URLS", "")
+        ),
     )
+
+
+def _parse_public_beacons(raw: str) -> Tuple[Tuple[str, str], ...]:
+    """Parse comma-separated URLs into (name, url) pairs. Name = hostname
+    minus common prefixes (e.g. 'ethereum-beacon-api.publicnode.com' -> 'publicnode')."""
+    if not raw.strip():
+        return ()
+    out = []
+    for url in (s.strip() for s in raw.split(",")):
+        if not url:
+            continue
+        # derive a short name from hostname
+        host = url.split("//", 1)[-1].split("/", 1)[0]
+        # heuristics: pick the recognisable middle token
+        if "publicnode" in host:
+            name = "publicnode"
+        elif "drpc" in host:
+            name = "drpc"
+        elif "llamarpc" in host:
+            name = "llamarpc"
+        elif "alchemy" in host:
+            name = "alchemy"
+        elif "blobscan" in host:
+            name = "blobscan"
+        else:
+            name = host.split(".")[0]
+        out.append((name, url))
+    return tuple(out)

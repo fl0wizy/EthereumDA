@@ -198,7 +198,7 @@ class SlotObserver:
                 await write_blob_txs(self.db, slot=slot,
                                      exec_block=exec_block, receipts=receipts)
 
-            await self.sidecar_probe.run(slot)
+            await self.sidecar_probe.run(slot, block_root=block_root)
 
         log.info("slot processed",
                  extra={"slot": slot, "blob_count": blob_count,

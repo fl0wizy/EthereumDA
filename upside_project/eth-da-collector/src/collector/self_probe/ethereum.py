@@ -41,6 +41,14 @@ TX_EXEC_GAS      = 21000                # plain EOA->EOA, no calldata
 # MAX_PENDING_PROBES * per_tx_max_cost.
 MAX_PENDING_PROBES = 3
 
+# Survival worker (`worker.tick`) only re-selects rows where
+# status='pending', so when `check_retrieval` early-returns because the EL
+# has no receipt yet, we must explicitly reset the row or it stays
+# 'running' forever. We retry up to this many ticks (~300s each) before
+# marking the row 'failed'. 1000 ticks ≈ 3.5 days — generous because Reth
+# full resync may take multiple days to catch up past the tx's block.
+MAX_RECEIPT_WAIT_ATTEMPTS = 1000
+
 
 # ----------------------- payload generation ------------------------------
 
@@ -151,12 +159,22 @@ class EthereumSelfProbe:
         beacon: BeaconAPI,
         cfg: SelfProbeConfig,
         network: str,
+        public_exec_rpc: Optional[ExecutionRPC] = None,
+        beacons: Optional[dict] = None,
     ):
         self.db = db
         self.exec_rpc = exec_rpc
         self.beacon = beacon
         self.cfg = cfg
         self.network = network
+        # Optional public EL fallback: used by check_retrieval when own EL
+        # returns null receipt (e.g. while own EL is still mid-sync past
+        # the block where the self-probe tx was included).
+        self.public_exec_rpc = public_exec_rpc
+        # Multi-source retrieve. Defaults to {'local': beacon} if not
+        # provided. When >1 source, each retrieve attempt fans out and
+        # records per-source rows in eth_blob_survival.
+        self.beacons: dict = beacons if beacons else {"local": beacon}
         # Derive sender from key at construction so we never trust env input.
         self._from: Optional[str] = None
         if cfg.private_key:
@@ -356,8 +374,23 @@ class EthereumSelfProbe:
 
         tx_hash = probe["tx_hash"]
         receipt = await self.exec_rpc.call("eth_getTransactionReceipt", [tx_hash])
+        if not receipt and self.public_exec_rpc is not None:
+            # Own EL didn't have the receipt yet (e.g. mid-sync). Try the
+            # public fallback — receipt is deterministic by tx_hash so any
+            # synced EL gives the same answer.
+            receipt = await self.public_exec_rpc.call(
+                "eth_getTransactionReceipt", [tx_hash]
+            )
         if not receipt:
-            return  # not yet included; worker will retry on next tick
+            attempts = int(row.get("attempt_count") or 0)
+            new_status = ("pending" if attempts < MAX_RECEIPT_WAIT_ATTEMPTS
+                          else "failed")
+            await self.db.execute(
+                "UPDATE probe_schedule SET status=$1, last_error='no_receipt_yet' "
+                "WHERE id=$2",
+                new_status, row["id"],
+            )
+            return
 
         block_number = int(receipt["blockNumber"], 16)
         gas_used       = int(receipt.get("gasUsed",         "0x0"), 16)
@@ -366,75 +399,147 @@ class EthereumSelfProbe:
         blob_gas_price = int(receipt.get("blobGasPrice", "0x0"), 16) if receipt.get("blobGasPrice") else 0
         cost = gas_used * eff_gas_price + blob_gas_used * blob_gas_price
 
-        slot = await self.db.fetchval(
-            "SELECT slot FROM eth_slots WHERE execution_block_number=$1", block_number
+        slot_row = await self.db.fetchrow(
+            "SELECT slot, block_root, timestamp FROM eth_slots "
+            "WHERE execution_block_number=$1",
+            block_number,
         )
+        slot = slot_row["slot"] if slot_row else None
+        block_root = slot_row["block_root"] if slot_row else None
+        block_ts = slot_row["timestamp"] if slot_row else None
+        # True broadcast -> inclusion latency. submit_timestamp is when
+        # submit_one() ran; block_ts is when the block actually landed on
+        # chain. Distinct from submit_latency_ms (RPC pipeline only).
+        inclusion_latency_ms: Optional[int] = None
+        if block_ts is not None and probe["submit_timestamp"] is not None:
+            delta = (block_ts - probe["submit_timestamp"]).total_seconds()
+            inclusion_latency_ms = int(delta * 1000) if delta >= 0 else None
 
-        started = time.monotonic()
-        success = False
-        retrieved_hash: Optional[str] = None
-        if slot is not None:
-            data, _l, _s, _e = await self.beacon.blob_sidecars_timed(int(slot))
+        # Pre-compute target versioned hashes (used by every source)
+        vhs_raw = probe["blob_versioned_hashes"] or []
+        vhs_list = json.loads(vhs_raw) if isinstance(vhs_raw, str) else list(vhs_raw)
+        target_vhs = {v.lower() for v in vhs_list if isinstance(v, str)}
+        from ..observers.blob_sidecar import kzg_to_versioned_hash
+
+        async def retrieve_from(source: str, client: BeaconAPI) -> dict:
+            """Single-source retrieve attempt. Returns per-source result dict."""
+            t0 = time.monotonic()
+            if slot is None:
+                return {
+                    "source": source, "success": False, "retrieved_hash": None,
+                    "retrieve_error": "slot_not_indexed",
+                    "beacon_http_status": None,
+                    "latency_ms": int((time.monotonic() - t0) * 1000),
+                }
+            query_id = block_root if block_root else int(slot)
+            data, _l, http_status, b_err = await client.blob_sidecars_timed(query_id)
+            r_err: Optional[str] = None
+            r_hash: Optional[str] = None
+            r_success = False
             if data:
-                vhs = probe["blob_versioned_hashes"] or []
-                vhs = json.loads(vhs) if isinstance(vhs, str) else list(vhs)
-                target_vhs = {v.lower() for v in vhs if isinstance(v, str)}
-                from ..observers.blob_sidecar import kzg_to_versioned_hash
+                matched = False
                 for sc in (data.get("data") or []):
                     blob_hex = sc.get("blob")
                     kzg = (sc.get("kzg_commitment") or "").lower()
                     vh = kzg_to_versioned_hash(kzg) if kzg else None
                     if vh and vh.lower() in target_vhs and blob_hex:
+                        matched = True
                         try:
                             raw = bytes.fromhex(blob_hex.removeprefix("0x"))
-                            retrieved_hash = hashlib.sha256(raw).hexdigest()
-                            success = True
+                            r_hash = hashlib.sha256(raw).hexdigest()
+                            r_success = True
                             break
                         except ValueError:
-                            pass
-        latency_ms = int((time.monotonic() - started) * 1000)
+                            r_err = "blob_hex_decode_failed"
+                if not r_success and r_err is None:
+                    r_err = "vh_not_matched" if not matched else "blob_payload_missing"
+            else:
+                r_err = (
+                    f"beacon_{b_err}:{http_status}"
+                    if b_err else "beacon_no_data"
+                )
+            return {
+                "source": source, "success": r_success, "retrieved_hash": r_hash,
+                "retrieve_error": r_err,
+                "beacon_http_status": http_status,
+                "latency_ms": int((time.monotonic() - t0) * 1000),
+            }
+
+        # Fan out across all configured beacons. Each source's outcome is
+        # recorded separately in eth_blob_survival below; the aggregate
+        # (any source succeeded = network availability) drives the single
+        # self_probe_ethereum row update.
+        per_source = await asyncio.gather(
+            *(retrieve_from(name, client) for name, client in self.beacons.items()),
+            return_exceptions=False,
+        )
+        # Aggregate for self_probe_ethereum UPDATE: prefer first successful
+        # source's retrieved_hash; otherwise carry first error.
+        success = any(r["success"] for r in per_source)
+        first_success = next((r for r in per_source if r["success"]), None)
+        retrieved_hash = first_success["retrieved_hash"] if first_success else None
+        retrieve_error = (
+            None if success
+            else next((r["retrieve_error"] for r in per_source if r["retrieve_error"]),
+                      "all_sources_failed")
+        )
+        # representative HTTP status / latency (local source preferred for
+        # backward compat of existing dashboards)
+        local_result = next((r for r in per_source if r["source"] == "local"), per_source[0])
+        beacon_http_status = local_result["beacon_http_status"]
+        latency_ms = local_result["latency_ms"]
         data_match = (retrieved_hash == probe["payload_hash"]) if retrieved_hash else None
         age_hours = (
             int((datetime.now(timezone.utc) - probe["submit_timestamp"]).total_seconds() / 3600)
             if probe["submit_timestamp"] else None
         )
 
+        # Preserve the original error (e.g. 'refused:*' reasons) when the
+        # row was never a real send; only fill in retrieve_error on real
+        # attempts that failed.
         await self.db.execute(
             """
             UPDATE self_probe_ethereum
-               SET submit_cost_wei     = COALESCE(submit_cost_wei, $2),
-                   gas_used            = COALESCE(gas_used, $8),
-                   effective_gas_price = COALESCE(effective_gas_price, $9),
-                   blob_gas_used       = COALESCE(blob_gas_used, $10),
-                   blob_gas_price      = COALESCE(blob_gas_price, $11),
-                   submit_status       = CASE WHEN submit_status='pending'
-                                              THEN 'included' ELSE submit_status END,
-                   retrieve_timestamp  = now(),
-                   retrieve_latency_ms = $3,
-                   retrieve_success    = $4,
-                   retrieve_data_hash  = $5,
-                   data_match          = $6,
-                   blob_age_hours      = $7
+               SET submit_cost_wei      = COALESCE(submit_cost_wei, $2),
+                   gas_used             = COALESCE(gas_used, $8),
+                   effective_gas_price  = COALESCE(effective_gas_price, $9),
+                   blob_gas_used        = COALESCE(blob_gas_used, $10),
+                   blob_gas_price       = COALESCE(blob_gas_price, $11),
+                   inclusion_latency_ms = COALESCE(inclusion_latency_ms, $13),
+                   submit_status        = CASE WHEN submit_status='pending'
+                                               THEN 'included' ELSE submit_status END,
+                   retrieve_timestamp   = now(),
+                   retrieve_latency_ms  = $3,
+                   retrieve_success     = $4,
+                   retrieve_data_hash   = $5,
+                   data_match           = $6,
+                   blob_age_hours       = $7,
+                   error                = CASE WHEN $4 THEN NULL
+                                               ELSE COALESCE($12, error) END
              WHERE probe_id = $1
             """,
             probe_id, cost, latency_ms, success, retrieved_hash, data_match, age_hours,
-            gas_used, eff_gas_price, blob_gas_used, blob_gas_price,
+            gas_used, eff_gas_price, blob_gas_used, blob_gas_price, retrieve_error,
+            inclusion_latency_ms,
         )
         if slot is not None:
-            await self.db.execute(
-                """
-                INSERT INTO eth_blob_survival
-                  (slot, blob_index, age_bucket, age_hours, checked_at,
-                   available, reconstructable, latency_ms, error_type, http_status)
-                VALUES ($1, NULL, $2, $3, now(), $4, NULL, $5, NULL, NULL)
-                ON CONFLICT (slot, blob_index, age_bucket) DO UPDATE SET
-                  checked_at = EXCLUDED.checked_at,
-                  age_hours  = EXCLUDED.age_hours,
-                  available  = EXCLUDED.available,
-                  latency_ms = EXCLUDED.latency_ms
-                """,
-                int(slot), bucket, age_hours, success, latency_ms,
-            )
+            # Per-source rows. source='self_probe:<name>' to separate from
+            # the passive blob_sidecar survival rows (which use raw source
+            # name like 'local', 'publicnode'). This keeps the table
+            # uniform but distinguishes who measured what.
+            for r in per_source:
+                await self.db.execute(
+                    """
+                    INSERT INTO eth_blob_survival
+                      (slot, blob_index, age_bucket, source, age_hours,
+                       checked_at, available, reconstructable, latency_ms,
+                       error_type, http_status)
+                    VALUES ($1, NULL, $2, $3, $4, now(), $5, NULL, $6, $7, $8)
+                    """,
+                    int(slot), bucket, f"self_probe:{r['source']}", age_hours,
+                    r["success"], r["latency_ms"],
+                    r["retrieve_error"], r["beacon_http_status"],
+                )
         await self.db.execute(
             "UPDATE probe_schedule SET status='done' WHERE id=$1", row["id"]
         )

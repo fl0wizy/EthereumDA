@@ -108,9 +108,12 @@ class BeaconAPI:
         return await self._get_json(f"/eth/v1/beacon/headers/{slot}", slot=slot)
 
     # Latency-measuring variant for survival checks; returns
-    # (data_or_none, latency_ms, http_status, error_type)
-    async def blob_sidecars_timed(self, slot: int):
-        url = f"{self._base}/eth/v1/beacon/blob_sidecars/{slot}"
+    # (data_or_none, latency_ms, http_status, error_type).
+    # block_id may be an int slot, a beacon block_root hex (e.g. 0x...),
+    # or one of the named aliases ("head", "finalized", "genesis").
+    # Querying by block_root is reorg-stable.
+    async def blob_sidecars_timed(self, block_id):
+        url = f"{self._base}/eth/v1/beacon/blob_sidecars/{block_id}"
         started = time.monotonic()
         try:
             resp = await self._client.get(url)
